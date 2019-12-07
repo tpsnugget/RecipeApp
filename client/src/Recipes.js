@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SideRecipes from "./SideRecipes"
 import axios from "axios"
 import "./Recipes.css"
 
@@ -26,12 +27,13 @@ class Recipes extends Component {
             }]
          }
       }
-      this.handleClick = this.handleClick.bind(this)
+      this.selectRecipe = this.selectRecipe.bind(this)
    }
 
-   handleClick(e) {
-      console.log("e.target.name", e.target.name)
-      console.log("e.target.value", e.target.value)
+   selectRecipe(id) {
+      this.setState({
+         _id: id
+      })
    }
 
    async callAPI() {
@@ -52,35 +54,16 @@ class Recipes extends Component {
 
       console.log("State: ", this.state.apiResponse.data)
 
-      // const {  title, descriptions, author, 
-      //          website, url, image, servings,
-      //          time, ingredients, prep, cooked,
-      //          cooked_date, keywords, rating    } = this.state.apiResponse.data
-
-      const recipes = this.state.apiResponse.data.map( (recipe, i) => {
-         return (
-            <div key={recipe._id} id={recipe._id} className="recipe">
-               <h2>{recipe.title}</h2>
-               <img src={recipe.image} alt={recipe.title} />
-               <button
-                  name={recipe.title}
-                  value={recipe._id}
-                  onClick={this.handleClick}
-               >
-                  More Info
-               </button>
-               { i < this.state.apiResponse.data.length - 1 && <hr /> }
-            </div>
-         )
-      })
-
       return (
          <div className="main-container">
             <div className="left-side-container">
-               {recipes}
+               <SideRecipes 
+                  data={this.state.apiResponse.data}
+                  selectRecipe={this.selectRecipe}
+               />
             </div>
             <div className="right-side-container">
-               <h1>Main Container</h1>
+               <h1>{this.state._id}</h1>
             </div>
          </div >
       )
