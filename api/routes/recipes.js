@@ -27,7 +27,7 @@ var Recipe = mongoose.model("Recipe", recipeSchema)
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
-   await Recipe.find({}, {title: 1, image: 1}, (err, data) => {
+   await Recipe.find({}, (err, data) => {
     //  console.log("req is: ", req)
     //  console.log("res is: ", res)
     // console.log(params) throws an error
