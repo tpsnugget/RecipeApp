@@ -1,0 +1,39 @@
+.main-container {
+   display: flex;
+   background-color: darkgray;
+   margin: 0 0.5rem;
+   border-radius: 0.15rem;
+}
+
+.left-side-container {
+   background-color: lightgray;
+   width: 250px;
+   font-size: 0.5rem;
+}
+
+.right-side-container {
+   width: 100%;
+   background-color: lightslategray;
+   align-content: flex-end;
+}
+
+.recipe {
+   display: flex;
+   flex-direction: column;
+   margin: 0.25rem 0;
+   align-items: center;
+}
+
+img {
+   width: 50%;
+   border-radius: 50%;
+}
+
+button {
+   display: flex;
+   margin: 0.5rem 0;
+}
+
+hr {
+   width: 95%;
+}
