@@ -1,21 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Route, Switch } from "react-router-dom"
+import Recipes from "./Recipes"
+import Show from "./Show"
+import Users from "./Users"
+import Landing from "./Landing"
+import Error from "./Error"
 import './App.css';
 
 function App() {
 
-  const [apiResponse, setApiResponse] = useState("")
-
-  useEffect( () => callAPI() )
-
-  function callAPI(){
-    fetch("http://localhost:9000/recipes")
-      .then(res => res.text())
-      .then(res => setApiResponse(res))
-  }
-
   return (
     <div className="App">
-      <h1>{apiResponse}</h1>
+      <Switch>
+        <Route exact path="/recipes/:id" component={Show}>
+        </Route>
+        <Route exact path="/recipes">
+          <Recipes />
+        </Route>
+        <Route exact path="/users">
+          <Users />
+        </Route>
+        <Route exact path="/">
+          <Landing />
+        </Route>
+        <Route path="">
+          <Error />
+        </Route>
+      </Switch>
     </div>
   );
 }
