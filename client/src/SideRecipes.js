@@ -8,12 +8,9 @@ class SideRecipes extends Component {
    }
 
    handleClick(e) {
-      console.log("e.target.value: ", e.target.value)
       const selectedRecipe = this.props.data.filter((r) => {
-         console.log("r._id: ", r._id)
          return r._id === e.target.value
       })
-      console.log("Sending selectedRecipe: ", selectedRecipe)
       this.props.selectRecipe(selectedRecipe)
    }
 
