@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import SideRecipes from "./SideRecipes"
 import axios from "axios"
 import "./Recipes.css"
@@ -8,8 +8,8 @@ class Recipes extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         apiResponse: {
-            data: [{
+         data:
+            [{
                title: "",
                descriptions: "",
                author: "",
@@ -24,46 +24,104 @@ class Recipes extends Component {
                cooked_date: "",
                keywords: "",
                rating: 0
-            }]
-         }
+            }],
+         chosenRecipe: [{
+            title: "",
+            descriptions: "",
+            author: "",
+            website: "",
+            url: "",
+            image: "",
+            servings: "",
+            time: "",
+            ingredients: [""],
+            prep: [""],
+            cooked: "",
+            cooked_date: "",
+            keywords: "",
+            rating: 0
+         }]
       }
       this.selectRecipe = this.selectRecipe.bind(this)
    }
 
-   selectRecipe(id) {
+   selectRecipe(recipe) {
+      console.log("Received recipe: ", recipe)
       this.setState({
-         _id: id
+         chosenRecipe: recipe
       })
+      console.log("state: ", this.state)
    }
 
    async callAPI() {
       try {
          this.setState({
-            apiResponse: await axios.get("http://localhost:9000/recipes")
+            data: await axios.get("http://localhost:9000/recipes")
          })
       } catch (error) {
          console.error(error)
       }
    }
 
-   componentWillMount() {
+   componentDidMount() {
       this.callAPI()
    }
 
    render() {
 
-      console.log("State: ", this.state.apiResponse.data)
+      var data = this.state.data
+
+      {
+         Array.isArray(data)
+            ? data = data
+            : data = data.data
+      }
+
+      const { title, image, ingredients, prep } = this.state.chosenRecipe[0]
+      console.log("ingredients: ", ingredients)
+
+      const showIngredients = ingredients.map((ingredient) => {
+         return (
+            <Fragment>
+               <p>
+                  {ingredient.amount} {ingredient.ingredient}
+               </p>
+            </Fragment>
+         )
+      })
+
+      const showPrep = prep.map((step, i) => {
+         return (
+            <Fragment>
+               <p><strong>Step {i + 1}:</strong>
+                  {step}
+               </p>
+            </Fragment>
+         )
+      })
 
       return (
          <div className="main-container">
             <div className="left-side-container">
-               <SideRecipes 
-                  data={this.state.apiResponse.data}
+               <SideRecipes
+                  data={data}
                   selectRecipe={this.selectRecipe}
                />
             </div>
             <div className="right-side-container">
-               <h1>{this.state._id}</h1>
+               <h1>{title}</h1>
+               <p>{this.state.chosenRecipe[0].description}</p>
+               <img src={this.state.chosenRecipe[0].image} alt={this.state.chosenRecipe[0].title} />
+               <div className="right-side-inner-container">
+                  <div className="right-side-ingredients">
+                     {title !== "" ? <h4>Ingredients:</h4> : ""}
+                        {showIngredients}
+                  </div>
+                  <div className="right-side-prep">
+                     {title !== "" ? <h4>Prep:</h4> : ""}
+                     {title !== "" ? showPrep : ""}
+                  </div>
+               </div>
             </div>
          </div >
       )

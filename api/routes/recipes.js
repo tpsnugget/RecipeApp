@@ -32,6 +32,10 @@ router.get('/', async function(req, res, next) {
     //  console.log("res is: ", res)
     // console.log(params) throws an error
     // console.log(req.params) prints out {}
+
+    // This sends an array of objects from the db
+    // console.log("data in server side router: ", data)
+
      res.send(data)
    } )
 });

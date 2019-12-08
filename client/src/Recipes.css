@@ -9,12 +9,44 @@
    background-color: lightgray;
    width: 250px;
    font-size: 0.5rem;
+   height: 100vh;
+   overflow-y: auto;
 }
 
 .right-side-container {
    width: 100%;
+   padding: 2rem;
    background-color: lightslategray;
    align-content: flex-end;
+}
+
+.right-side-container p {
+   text-align: left;
+   white-space: normal;
+   margin: 0.5rem 0;
+}
+
+.right-side-inner-container {
+   display: flex;
+}
+
+.right-side-ingredients {
+   width: 30%;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+}
+
+.right-side-prep {
+   margin-left: 5rem;
+   width: 70%;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+}
+
+.right-side-prep strong {
+   padding-right: 1rem;
 }
 
 .recipe {
@@ -24,7 +56,7 @@
    align-items: center;
 }
 
-img {
+.left-side-container img {
    width: 50%;
    border-radius: 50%;
 }

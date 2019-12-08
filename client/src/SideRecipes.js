@@ -2,19 +2,23 @@ import React, { Component } from "react"
 
 class SideRecipes extends Component {
 
-   constructor(props){
+   constructor(props) {
       super(props)
       this.handleClick = this.handleClick.bind(this)
    }
 
-   handleClick(e){
-      this.props.selectRecipe(e.target.value)
+   handleClick(e) {
+      console.log("e.target.value: ", e.target.value)
+      const selectedRecipe = this.props.data.filter((r) => {
+         console.log("r._id: ", r._id)
+         return r._id === e.target.value
+      })
+      console.log("Sending selectedRecipe: ", selectedRecipe)
+      this.props.selectRecipe(selectedRecipe)
    }
 
    render() {
-
       const { data } = this.props
-      console.log("this.props: ", this.props)
 
       const recipes = data.map((recipe, i) => {
          return (
