@@ -71,6 +71,9 @@ class Recipes extends Component {
 
       var data = this.state.data
 
+      /* The ternary operator below is because sometimes the data from the db
+         is one-level down in an array, and sometimes it is two-levels down
+         in an array */
       {
          Array.isArray(data)
             ? data = data
@@ -108,14 +111,15 @@ class Recipes extends Component {
                   selectRecipe={this.selectRecipe}
                />
             </div>
-            <div className="right-side-container">
-               <h1>{title}</h1>
-               <p>{this.state.chosenRecipe[0].description}</p>
+            <div className="right-side-container">               <button>Edit</button>
+               <button>Delete</button>
+               {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}
+               <p className="description">{this.state.chosenRecipe[0].description}</p>
                <img src={this.state.chosenRecipe[0].image} alt={this.state.chosenRecipe[0].title} />
                <div className="right-side-inner-container">
                   <div className="right-side-ingredients">
                      {title !== "" ? <h4>Ingredients:</h4> : ""}
-                        {showIngredients}
+                     {showIngredients}
                   </div>
                   <div className="right-side-prep">
                      {title !== "" ? <h4>Prep:</h4> : ""}

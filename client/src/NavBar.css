@@ -1,0 +1,34 @@
+.NavBar, .NavBar-right-side {
+   width: 100%;
+   height: 64px;
+   background-color: darkred;
+   display: flex;
+   justify-content: flex-end;
+}
+
+.NavBar-left-side {
+   width: 30%;
+   font-size: 1rem;
+   font-weight: 700;
+   color: rgb(220, 220, 220);
+   letter-spacing: 0.1rem;
+   margin: 0 1rem;
+   align-self: center;
+}
+
+button {
+   border: none;
+   outline: none;
+   background-color: inherit;
+   font-size: 1rem;
+   font-weight: 700;
+   color: rgb(220, 220, 220);
+   transition: ease-in-out 0.25s;
+   letter-spacing: 0.1rem;
+   margin: 0 1rem;
+}
+
+button:hover {
+   color: rgba(200, 200, 200, 0.7);
+}
+
