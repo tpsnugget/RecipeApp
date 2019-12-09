@@ -33,7 +33,7 @@ class Signup extends Component {
       const newUser = {
          first: this.state.first,
          last: this.state.last,
-         username: this.state.username,
+         username: this.state.username.toLowerCase(),
          email: this.state.email,
          password: this.state.password
       }
