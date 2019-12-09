@@ -16,7 +16,8 @@ class Signup extends Component {
          password: "",
          password2: "",
          loggedInId: false,
-         snackBarOpen: true
+         snackBarOpen: false,
+         msg: ""
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -32,44 +33,52 @@ class Signup extends Component {
       e.preventDefault()
 
       // send the data somewhere
-
-      const newUser = {
-         first: this.state.first,
-         last: this.state.last,
-         username: this.state.username.toLowerCase(),
-         email: this.state.email,
-         password: this.state.password
-      }
-
-      axios.post("http://localhost:9000/signup", newUser)
-         .then((response) => {
-            console.log(response)
-            if (response.data.name === "MongoError") {
-               this.setState({
-                  loggedInId: false,
-                  snackBarOpen: true
-               })
-            } else {
-               this.setState({
-                  loggedInId: response.data._id
-               })
-            }
+      if (this.state.first === "" || this.state.last === "" || this.state.username === "" ||
+         this.state.password === "" || this.state.password2 === "") {
+         this.setState({
+            snackBarOpen: true,
+            msg: "Entries not allowed to be empty, please try again"
          })
-         .catch((err) => console.log(err))
+      } else {
+         const newUser = {
+            first: this.state.first,
+            last: this.state.last,
+            username: this.state.username.toLowerCase(),
+            email: this.state.email,
+            password: this.state.password
+         }
 
-      this.setState({
-         first: "",
-         last: "",
-         username: "",
-         email: "",
-         password: "",
-         password2: ""
-      })
+         axios.post("http://localhost:9000/signup", newUser)
+            .then((response) => {
+               console.log(response)
+               if (response.data.name === "MongoError") {
+                  this.setState({
+                     loggedInId: false,
+                     snackBarOpen: true,
+                     msg: "Those login credentials have already been used"
+                  })
+               } else {
+                  this.setState({
+                     loggedInId: response.data._id
+                  })
+               }
+            })
+            .catch((err) => console.log(err))
+
+         this.setState({
+            first: "",
+            last: "",
+            username: "",
+            email: "",
+            password: "",
+            password2: ""
+         })
+      }
    }
 
    render() {
 
-      if(this.state.snackBarOpen){
+      if (this.state.snackBarOpen) {
          setTimeout(() => {
             this.setState({
                snackBarOpen: false
@@ -77,7 +86,8 @@ class Signup extends Component {
          }, 3000);
       }
 
-      const { first, last, username, email, password, password2, loggedInId, snackBarOpen } = this.state
+      const { first, last, username, email, password, password2,
+         loggedInId, snackBarOpen, msg } = this.state
 
       return (
          <Fragment>
@@ -86,7 +96,7 @@ class Signup extends Component {
                open={snackBarOpen}
                variant="error"
                className={"snackbar"}
-               message={"Those login credentials have already been used"}
+               message={msg}
                anchorOrigin={{
                   vertical: "bottom",
                   horizontal: "left"
@@ -157,10 +167,6 @@ class Signup extends Component {
                         />
                      </label>
                   </div>
-                  <Link
-                     to="/login"
-                     className="Signup-button"
-                  >Submit</Link>
                   <button>Submit</button>
                   <Link
                      to="/"
