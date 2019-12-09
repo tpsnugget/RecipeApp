@@ -1,5 +1,6 @@
-import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import React, { Component, Fragment } from "react"
+import { Link, Redirect } from "react-router-dom"
+import Snackbar from '@material-ui/core/Snackbar';
 import axios from "axios"
 import "./Signup.css"
 
@@ -14,7 +15,8 @@ class Signup extends Component {
          email: "",
          password: "",
          password2: "",
-         loggedInId: ""
+         loggedInId: false,
+         snackBarOpen: true
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -39,20 +41,21 @@ class Signup extends Component {
          password: this.state.password
       }
 
-      const newUserData = axios.post("http://localhost:9000/signup", newUser)
-                           .then((response) => {
-                              console.log(response)
-                              if(response.data.name === "MongoError"){
-                                 this.setState({
-                                    loggedInId: "badSignup"
-                                 })
-                              } else {
-                                 this.setState({
-                                    loggedInId: response.data._id
-                                 })
-                              }
-                           })
-                           .catch((err) => console.log(err))
+      axios.post("http://localhost:9000/signup", newUser)
+         .then((response) => {
+            console.log(response)
+            if (response.data.name === "MongoError") {
+               this.setState({
+                  loggedInId: false,
+                  snackBarOpen: true
+               })
+            } else {
+               this.setState({
+                  loggedInId: response.data._id
+               })
+            }
+         })
+         .catch((err) => console.log(err))
 
       this.setState({
          first: "",
@@ -66,10 +69,29 @@ class Signup extends Component {
 
    render() {
 
-      const { first, last, username, email, password, password2 } = this.state
+      if(this.state.snackBarOpen){
+         setTimeout(() => {
+            this.setState({
+               snackBarOpen: false
+            })
+         }, 3000);
+      }
+
+      const { first, last, username, email, password, password2, loggedInId, snackBarOpen } = this.state
 
       return (
-         <>
+         <Fragment>
+            {loggedInId && <Redirect to="/login" />}
+            <Snackbar
+               open={snackBarOpen}
+               variant="error"
+               className={"snackbar"}
+               message={"Those login credentials have already been used"}
+               anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left"
+               }}
+            />
             <h1>Signup is up Man!</h1>
             <div className="Signup">
                <form onSubmit={this.handleSubmit} action="" method="post">
@@ -146,7 +168,7 @@ class Signup extends Component {
                   >Cancel</Link>
                </form>
             </div>
-         </>
+         </Fragment>
       )
    }
 }
