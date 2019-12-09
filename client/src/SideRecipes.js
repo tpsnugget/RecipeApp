@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import "./SideRecipes.css"
 
 class SideRecipes extends Component {
 
@@ -23,6 +24,7 @@ class SideRecipes extends Component {
                <h2>{recipe.title}</h2>
                <img src={recipe.image} alt={recipe.title} />
                <button
+                  className="SideRecipes-button"
                   name={recipe.title}
                   value={recipe._id}
                   onClick={this.handleClick}

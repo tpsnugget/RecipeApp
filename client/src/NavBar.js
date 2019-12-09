@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Link } from "react-router-dom"
 import "./NavBar.css"
 
 class NavBar extends Component {
@@ -17,17 +18,17 @@ class NavBar extends Component {
       return (
          <div className="NavBar">
             <div className="NavBar-left-side">
-               { isLoggedIn ? <>Signed in as: Mike Giebner</> : <>Please Login or Sign Up</>}
+               { isLoggedIn ? <>Signed in as: Mike Giebner</> : <>Please Login or Sign Up<i class="fa fa-arrow-right"></i></>}
             </div>
             <div className="NavBar-right-side">
-               { isLoggedIn ? "" : <button className="NavBar-Login-button">LOGIN</button>}
-               { isLoggedIn ? "" : <button className="NavBar-SignUp-button">SIGN UP</button>}
-               { isLoggedIn ? <button className="NavBar-SignOut-button">SIGN OUT</button> : ""}
+               { isLoggedIn ? "" : <Link className="NavBar-Login-button">LOGIN</Link>}
+               { isLoggedIn ? "" : <Link to="/signup" className="NavBar-SignUp-button">SIGN UP</Link>}
+               { isLoggedIn ? <Link className="NavBar-SignOut-button">SIGN OUT</Link> : ""}
             </div>
-
          </div>
       )
    }
 }
 
 export default NavBar
+

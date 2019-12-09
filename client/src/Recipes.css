@@ -73,11 +73,6 @@
    padding: 2rem 0;
 }
 
-button {
-   display: flex;
-   margin: 0.5rem 0;
-}
-
 hr {
    width: 95%;
 }

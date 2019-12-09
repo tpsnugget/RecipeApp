@@ -1,0 +1,10 @@
+.SideRecipes-button {
+   border: 1.35px solid rgb(125, 125, 125);
+   border-radius: 0.25rem;
+   margin: 0.35rem;
+   padding: 0.2rem 0.5rem;
+   color: white;
+   background-color: inherit;
+   font-size: 0.75rem;
+}
+

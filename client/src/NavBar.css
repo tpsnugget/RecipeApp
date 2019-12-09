@@ -16,7 +16,7 @@
    align-self: center;
 }
 
-button {
+.NavBar-Login-button, .NavBar-SignUp-button {
    border: none;
    outline: none;
    background-color: inherit;
@@ -26,9 +26,17 @@ button {
    transition: ease-in-out 0.25s;
    letter-spacing: 0.1rem;
    margin: 0 1rem;
+   align-self: center;
 }
 
-button:hover {
+.NavBar-Login-button, .NavBar-SignUp-button {
+   text-decoration: none;
+}
+
+.NavBar-Login-button:hover, .NavBar-SignUp-button:hover {
    color: rgba(200, 200, 200, 0.7);
 }
 
+.fa-arrow-right {
+   margin-left: 0.5rem;
+}
