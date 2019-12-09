@@ -3,16 +3,26 @@ import "./NavBar.css"
 
 class NavBar extends Component {
 
+   constructor(props){
+      super(props)
+      this.state = {
+         isLoggedIn: false
+      }
+   }
+
    render() {
+
+      const { isLoggedIn } = this.state
+
       return (
          <div className="NavBar">
             <div className="NavBar-left-side">
-               <>Signed in as: Mike Giebner</>
+               { isLoggedIn ? <>Signed in as: Mike Giebner</> : <>Please Login or Sign Up</>}
             </div>
             <div className="NavBar-right-side">
-               <button className="NavBar-Login-button">LOGIN</button>
-               <button className="NavBar-SignUp-button">SIGN UP</button>
-               <button className="NavBar-SignOut-button">SIGN OUT</button>
+               { isLoggedIn ? "" : <button className="NavBar-Login-button">LOGIN</button>}
+               { isLoggedIn ? "" : <button className="NavBar-SignUp-button">SIGN UP</button>}
+               { isLoggedIn ? <button className="NavBar-SignOut-button">SIGN OUT</button> : ""}
             </div>
 
          </div>
