@@ -13,7 +13,8 @@ class Signup extends Component {
          username: "",
          email: "",
          password: "",
-         password2: ""
+         password2: "",
+         loggedInId: ""
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -38,7 +39,20 @@ class Signup extends Component {
          password: this.state.password
       }
 
-      axios.post("http://localhost:9000/signup", newUser)
+      const newUserData = axios.post("http://localhost:9000/signup", newUser)
+                           .then((response) => {
+                              console.log(response)
+                              if(response.data.name === "MongoError"){
+                                 this.setState({
+                                    loggedInId: "badSignup"
+                                 })
+                              } else {
+                                 this.setState({
+                                    loggedInId: response.data._id
+                                 })
+                              }
+                           })
+                           .catch((err) => console.log(err))
 
       this.setState({
          first: "",
