@@ -1,0 +1,23 @@
+.Login {
+   display: flex;
+   justify-content: center;
+}
+
+.Login-div-row {
+   flex-direction: column;
+   margin-bottom: 1rem;
+}
+
+.Login-input-column-one {
+   margin-right: 3rem;
+}
+
+.Login-button {
+   text-decoration: none;
+   font-size: 1rem;
+   margin: 1.5rem 1.0rem;
+   color: black;
+   border: 1px solid black;
+   border-radius: 0.25rem;
+   padding: 0.25rem 0.5rem;
+}
