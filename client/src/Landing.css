@@ -1,0 +1,18 @@
+.Landing-button {
+   border: 1px solid black;
+   border-radius: 0.25rem;
+   background-color: inherit;
+   color: black;
+   font-size: 1.2rem;
+   font-weight: 700;
+   transition: ease-in-out 0.25s;
+   letter-spacing: 0.1rem;
+   margin: 0 1rem;
+   text-decoration: none;
+   padding: 0.25rem 0.5rem;
+}
+
+.Landing-button:hover {
+   color: rgba(25, 25, 25, 0.7);
+   background-color: rgb(220, 220, 220);
+}
