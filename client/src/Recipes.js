@@ -75,12 +75,10 @@ class Recipes extends Component {
          is one-level down in an array, and sometimes it is two-levels down
          in an array */
       {
-         Array.isArray(data)
-            ? data = data
-            : data = data.data
+         Array.isArray(data) ? data = data : data = data.data
       }
 
-      const { title, image, ingredients, prep } = this.state.chosenRecipe[0]
+      const { title, ingredients, prep } = this.state.chosenRecipe[0]
       console.log("ingredients: ", ingredients)
 
       const showIngredients = ingredients.map((ingredient) => {

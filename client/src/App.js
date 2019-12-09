@@ -5,6 +5,7 @@ import Show from "./Show"
 import Users from "./Users"
 import Landing from "./Landing"
 import Error from "./Error"
+import Signup from "./Signup"
 import './App.css';
 
 function App() {
@@ -16,6 +17,9 @@ function App() {
         </Route>
         <Route exact path="/recipes">
           <Recipes />
+        </Route>
+        <Route exact path="/signup">
+          <Signup />
         </Route>
         <Route exact path="/users">
           <Users />

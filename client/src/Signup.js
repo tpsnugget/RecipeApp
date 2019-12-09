@@ -1,0 +1,129 @@
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import "./Signup.css"
+
+class Signup extends Component {
+
+   constructor(props) {
+      super(props)
+      this.state = {
+         first: "",
+         last: "",
+         username: "",
+         email: "",
+         password: "",
+         password2: ""
+      }
+      this.handleChange = this.handleChange.bind(this)
+      this.handleSubmit = this.handleSubmit.bind(this)
+   }
+
+   handleChange(e) {
+      this.setState({
+         [e.target.name]: e.target.value
+      })
+   }
+
+   handleSubmit(e) {
+      e.preventDefault()
+      // send the data somewhere
+
+      console.log("e.target: ", e.target)
+
+      this.setState({
+         first: "",
+         last: "",
+         username: "",
+         email: "",
+         password: "",
+         password2: ""
+      })
+   }
+
+   render() {
+
+      const { first, last, username, email, password, password2 } = this.state
+
+      return (
+         <>
+            <h1>Signup is up Man!</h1>
+            <div className="Signup">
+               <form onSubmit={this.handleSubmit}>
+                  <div className="Signup-div-row">
+                     <label>First Name:
+                  <input className="Signup-input-column-one"
+                           type="text"
+                           placeholder="First Name"
+                           name="first"
+                           value={first}
+                           onChange={this.handleChange}
+                        />
+                     </label>
+                     <label>Last Name:
+                  <input
+                           type="text"
+                           placeholder="Last Name"
+                           name="last"
+                           value={last}
+                           onChange={this.handleChange}
+                        />
+                     </label>
+                  </div>
+
+                  <div className="Signup-div-row">
+                     <label>Username:
+                  <input className="Signup-input-column-one"
+                           type="text"
+                           placeholder="Username"
+                           name="username"
+                           value={username}
+                           onChange={this.handleChange}
+                        />
+                     </label>
+                     <label>Email:
+                  <input
+                           type="email"
+                           placeholder="Email"
+                           name="email"
+                           value={email}
+                           onChange={this.handleChange}
+                        />
+                     </label>
+                  </div>
+
+                  <div className="Signup-div-row">
+                     <label>Password:
+                  <input className="Signup-input-column-one"
+                           type="password"
+                           placeholder="Password"
+                           name="password"
+                           value={password}
+                           onChange={this.handleChange}
+                        />
+                     </label>
+                     <label>Password:
+                  <input
+                           type="password"
+                           placeholder="Password"
+                           name="password2"
+                           value={password2}
+                           onChange={this.handleChange}
+                        />
+                     </label>
+                  </div>
+                  <Link
+                     to="/recipes"
+                     className="Signup-button"
+                  >Submit</Link>
+                  <Link
+                     to="/"
+                     className="Signup-button"
+                  >Cancel</Link>
+               </form>
+            </div>
+         </>
+      )
+   }
+}
+
+export default Signup
