@@ -21,10 +21,10 @@ var User = mongoose.model("User", userSchema)
 /* GET users listing. */
 router.post('/', async function (req, res, next) {
    const newUser = req.body
-   console.log("newUser in signup: ", newUser)
    await User.create(newUser, (err, data) => {
       if (err) {
          console.error(err.errmsg)
+         res.send(err)
       } else {
          console.log(data)
          res.send(data)
