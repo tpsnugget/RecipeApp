@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
+import axios from "axios"
 import "./Signup.css"
 
 class Signup extends Component {
@@ -26,9 +27,18 @@ class Signup extends Component {
 
    handleSubmit(e) {
       e.preventDefault()
+
       // send the data somewhere
 
-      console.log("e.target: ", e.target)
+      const newUser = {
+         first: this.state.first,
+         last: this.state.last,
+         username: this.state.username,
+         email: this.state.email,
+         password: this.state.password
+      }
+
+      axios.post("http://localhost:9000/signup", newUser)
 
       this.setState({
          first: "",
@@ -48,7 +58,7 @@ class Signup extends Component {
          <>
             <h1>Signup is up Man!</h1>
             <div className="Signup">
-               <form onSubmit={this.handleSubmit}>
+               <form onSubmit={this.handleSubmit} action="" method="post">
                   <div className="Signup-div-row">
                      <label>First Name:
                   <input className="Signup-input-column-one"
@@ -112,9 +122,10 @@ class Signup extends Component {
                      </label>
                   </div>
                   <Link
-                     to="/recipes"
+                     to="/login"
                      className="Signup-button"
                   >Submit</Link>
+                  <button>Submit</button>
                   <Link
                      to="/"
                      className="Signup-button"

@@ -46,11 +46,9 @@ class Recipes extends Component {
    }
 
    selectRecipe(recipe) {
-      console.log("Received recipe: ", recipe)
       this.setState({
          chosenRecipe: recipe
       })
-      console.log("state: ", this.state)
    }
 
    async callAPI() {
@@ -109,7 +107,8 @@ class Recipes extends Component {
                   selectRecipe={this.selectRecipe}
                />
             </div>
-            <div className="right-side-container">               <button>Edit</button>
+            <div className="right-side-container">
+               <button>Edit</button>
                <button>Delete</button>
                {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}
                <p className="description">{this.state.chosenRecipe[0].description}</p>
