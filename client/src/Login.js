@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { Link } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
+import Snackbar from '@material-ui/core/Snackbar';
 import axios from "axios"
 import "./Login.css"
 
@@ -9,7 +10,12 @@ class Login extends Component {
       super(props)
       this.state = {
          username: "",
-         password: ""
+         password: "",
+         passwordFromDB: "",
+         _id: "",
+         snackBarOpen: false,
+         msg: "",
+         goodLogin: false
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -31,33 +37,75 @@ class Login extends Component {
 
       console.log("userLoginData going to server: ", userLoginData)
 
-      axios.get("http://localhost:9000/signup", {
+      const response = axios.get("http://localhost:9000/signup", {
          params: {
             username: this.state.username.toLowerCase()
          }
       })
-      .then((response) => {
-         console.log("response from the server: ", response)
-         if (response.data.name === "MongoError") {
-            console.log("axios.get MongoError")
-         } else {
-            console.log("axios.get response: ", response)
-         }
-      })
-      .catch((err) => console.log(err))
+         .then((response) => {
+            console.log("response from the server: ", response)
+            if (response.data === "") {
+               console.log("axios.get not in the db")
+            } else {
+               this.setState({
+                  username: response.data.username,
+                  passwordFromDB: response.data.password,
+                  _id: response.data._id
+               })
+               this.checkForGoodLogin()
+            }
+         })
+         .catch((err) => console.log(err))
+   }
 
-      this.setState({
-         username: "",
-         password: ""
-      })
+   checkForGoodLogin(){
+      if( this.state._id && ( this.state.password === this.state.passwordFromDB ) ){
+         this.setState({
+            snackBarOpen: true,
+            msg: "Successfull Login",
+         })
+         setTimeout(() => {
+            this.setState({
+               goodLogin: true
+            })
+         }, 3000);
+      } else {
+         this.setState({
+            username: "",
+            password: "",
+            passwordFromDB: "",
+            _id: "",
+            snackBarOpen: true,
+            msg: "Login not successful",
+         })
+      }
    }
 
    render() {
 
-      const { username, password } = this.state
+      if (this.state.snackBarOpen) {
+         setTimeout(() => {
+            this.setState({
+               snackBarOpen: false
+            })
+         }, 2500);
+      }
+
+      const { username, password, snackBarOpen, msg, goodLogin } = this.state
 
       return (
          <>
+         {goodLogin && <Redirect to="/recipes" />}
+            <Snackbar
+               open={snackBarOpen}
+               variant="error"
+               className={"snackbar"}
+               message={msg}
+               anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left"
+               }}
+            />
             <h1>Login is up Man!</h1>
             <div className="Login">
                <form onSubmit={this.handleSubmit}>
