@@ -22,7 +22,7 @@ class NavBar extends Component {
 
       const { isLoggedIn } = this.state
       const { first, last } = this.props
-      console.log(first, " ", last)
+      console.log("In NavBar.js: ", first, " ", last)
 
       return (
          <div className="NavBar">
