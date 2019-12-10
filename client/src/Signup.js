@@ -33,8 +33,8 @@ class Signup extends Component {
       e.preventDefault()
 
       // send the data somewhere
-      if (this.state.first === "" || this.state.last === "" || this.state.username === "" ||
-         this.state.password === "" || this.state.password2 === "") {
+      if (this.state.first === "" || this.state.last === ""     || this.state.username === "" ||
+         this.state.email === ""  || this.state.password === "" || this.state.password2 === "") {
          this.setState({
             snackBarOpen: true,
             msg: "Entries not allowed to be empty, please try again"

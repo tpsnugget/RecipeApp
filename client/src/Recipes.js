@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import SideRecipes from "./SideRecipes"
 import axios from "axios"
 import "./Recipes.css"
+import NavBar from "./NavBar"
 
 class Recipes extends Component {
 
@@ -100,31 +101,34 @@ class Recipes extends Component {
       })
 
       return (
-         <div className="main-container">
-            <div className="left-side-container">
-               <SideRecipes
-                  data={data}
-                  selectRecipe={this.selectRecipe}
-               />
-            </div>
-            <div className="right-side-container">
-               <button>Edit</button>
-               <button>Delete</button>
-               {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}
-               <p className="description">{this.state.chosenRecipe[0].description}</p>
-               <img src={this.state.chosenRecipe[0].image} alt={this.state.chosenRecipe[0].title} />
-               <div className="right-side-inner-container">
-                  <div className="right-side-ingredients">
-                     {title !== "" ? <h4>Ingredients:</h4> : ""}
-                     {showIngredients}
-                  </div>
-                  <div className="right-side-prep">
-                     {title !== "" ? <h4>Prep:</h4> : ""}
-                     {title !== "" ? showPrep : ""}
+         <Fragment>
+            <NavBar />
+            <div className="main-container">
+               <div className="left-side-container">
+                  <SideRecipes
+                     data={data}
+                     selectRecipe={this.selectRecipe}
+                  />
+               </div>
+               <div className="right-side-container">
+                  <button>Edit</button>
+                  <button>Delete</button>
+                  {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}
+                  <p className="description">{this.state.chosenRecipe[0].description}</p>
+                  <img src={this.state.chosenRecipe[0].image} alt={this.state.chosenRecipe[0].title} />
+                  <div className="right-side-inner-container">
+                     <div className="right-side-ingredients">
+                        {title !== "" ? <h4>Ingredients:</h4> : ""}
+                        {showIngredients}
+                     </div>
+                     <div className="right-side-prep">
+                        {title !== "" ? <h4>Prep:</h4> : ""}
+                        {title !== "" ? showPrep : ""}
+                     </div>
                   </div>
                </div>
-            </div>
-         </div >
+            </div >
+         </Fragment>
       )
    }
 }

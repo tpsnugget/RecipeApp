@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
+import axios from "axios"
 import "./Login.css"
 
 class Login extends Component {
@@ -22,9 +23,28 @@ class Login extends Component {
 
    handleSubmit(e) {
       e.preventDefault()
-      // send the data somewhere
 
-      console.log("e.target: ", e.target)
+      const userLoginData = {
+         username: this.state.username.toLowerCase(),
+         password: this.state.password
+      }
+
+      console.log("userLoginData going to server: ", userLoginData)
+
+      axios.get("http://localhost:9000/signup", {
+         params: {
+            username: this.state.username.toLowerCase()
+         }
+      })
+      .then((response) => {
+         console.log("response from the server: ", response)
+         if (response.data.name === "MongoError") {
+            console.log("axios.get MongoError")
+         } else {
+            console.log("axios.get response: ", response)
+         }
+      })
+      .catch((err) => console.log(err))
 
       this.setState({
          username: "",
@@ -61,10 +81,9 @@ class Login extends Component {
                         />
                      </label>
                   </div>
-                  <Link
-                     to="/recipes"
+                  <button
                      className="Login-button"
-                  >Submit</Link>
+                  >Submit</button>
                   <Link
                      to="/"
                      className="Login-button"

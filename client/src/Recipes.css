@@ -68,6 +68,10 @@
    border-radius: 50%;
 }
 
+.left-side-container button {
+   color: black;
+}
+
 .right-side-container img {
    max-height: 35%;
    padding: 2rem 0;
