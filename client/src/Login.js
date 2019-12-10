@@ -104,7 +104,7 @@ class Login extends Component {
          {isLoggedIn && <Redirect to={{
             pathname: "/recipes",
             state: {
-               referrer: `${first} ${last}`
+               isLoggedIn: true
             }
          }} />}
             <Snackbar

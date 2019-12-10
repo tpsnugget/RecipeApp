@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Redirect } from "react-router-dom"
 import SideRecipes from "./SideRecipes"
 import axios from "axios"
 import "./Recipes.css"
@@ -42,9 +43,11 @@ class Recipes extends Component {
             keywords: "",
             rating: 0
          }],
-         isLoggedIn: true
+         isLoggedIn: true,
+         addRecipe: false
       }
       this.selectRecipe = this.selectRecipe.bind(this)
+      this.addRecipe = this.addRecipe.bind(this)
    }
 
    selectRecipe(recipe) {
@@ -65,6 +68,12 @@ class Recipes extends Component {
 
    componentDidMount() {
       this.callAPI()
+   }
+
+   addRecipe(){
+      this.setState({
+         addRecipe: true
+      })
    }
 
    render() {
@@ -101,11 +110,14 @@ class Recipes extends Component {
          )
       })
 
+      const { addRecipe } = this.state
+
       return (
          <Fragment>
             <NavBar
                isLoggedIn={this.state.isLoggedIn}
             />
+            {addRecipe && <Redirect to="/AddRecipe"/>}
             <div className="main-container">
                <div className="left-side-container">
                   <SideRecipes
@@ -114,6 +126,7 @@ class Recipes extends Component {
                   />
                </div>
                <div className="right-side-container">
+                  <button onClick={this.addRecipe}>Add Recipe</button>
                   <button>Edit</button>
                   <button>Delete</button>
                   {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}

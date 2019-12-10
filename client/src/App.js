@@ -7,6 +7,7 @@ import Landing from "./Landing"
 import Error from "./Error"
 import Signup from "./Signup"
 import Login from "./Login"
+import AddRecipe from "./AddRecipe"
 import './App.css';
 
 function App() {
@@ -15,6 +16,9 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/recipes/:id" component={Show}>
+        </Route>
+        <Route exact path="/AddRecipe">
+          <AddRecipe />
         </Route>
         <Route exact path="/recipes">
           <Recipes />
