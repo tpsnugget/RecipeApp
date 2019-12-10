@@ -48,6 +48,7 @@ class Recipes extends Component {
       }
       this.selectRecipe = this.selectRecipe.bind(this)
       this.addRecipe = this.addRecipe.bind(this)
+      this.deleteRecipe = this.deleteRecipe.bind(this)
    }
 
    selectRecipe(recipe) {
@@ -74,6 +75,29 @@ class Recipes extends Component {
       this.setState({
          addRecipe: true
       })
+   }
+   
+   deleteRecipe(){
+      axios.delete("http://localhost:9000/recipes", {
+         params: {
+            _id: this.state.chosenRecipe[0]._id
+         }
+      })
+      .then((response) => {
+         console.log(response)
+         if (response.data.name === "MongoError") {
+            // this.setState({
+            //    loggedInId: false,
+            //    snackBarOpen: true,
+            //    msg: "Those login credentials have already been used"
+            // })
+         } else {
+            // this.setState({
+            //    loggedInId: response.data._id
+            // })
+         }
+      })
+      .catch((err) => console.log(err))
    }
 
    render() {
@@ -127,8 +151,8 @@ class Recipes extends Component {
                </div>
                <div className="right-side-container">
                   <button onClick={this.addRecipe}>Add Recipe</button>
-                  <button>Edit</button>
-                  <button>Delete</button>
+                  <button>Edit Recipe</button>
+                  <button onClick={this.deleteRecipe}>Delete Recipe</button>
                   {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}
                   <p className="description">{this.state.chosenRecipe[0].description}</p>
                   <img src={this.state.chosenRecipe[0].image} alt={this.state.chosenRecipe[0].title} />

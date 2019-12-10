@@ -1,0 +1,22 @@
+span {
+   border: 1px solid black;
+   border-radius: 0.25rem;
+   padding: 0.25rem 0.5rem;
+   margin-left: 1rem;
+}
+
+.AddRecipe-div {
+   margin-bottom: 2rem;
+}
+
+.AddRecipe-array-div {
+   display: flex;
+}
+
+.AddRecipe-ingredients {
+   width: 35%;
+}
+
+.AddRecipe-ingredients {
+   width: 60%;
+}
