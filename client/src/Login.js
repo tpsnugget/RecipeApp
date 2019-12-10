@@ -39,7 +39,7 @@ class Login extends Component {
 
       console.log("userLoginData going to server: ", userLoginData)
 
-      const response = axios.get("http://localhost:9000/signup", {
+      axios.get("http://localhost:9000/signup", {
          params: {
             username: this.state.username.toLowerCase()
          }
@@ -97,7 +97,7 @@ class Login extends Component {
          }, 2500);
       }
 
-      const { first, last, username, password, snackBarOpen, msg, isLoggedIn } = this.state
+      const { username, password, snackBarOpen, msg, isLoggedIn } = this.state
 
       return (
          <>

@@ -43,6 +43,7 @@ router.get('/', async function(req, res) {
 /* Add New Recipe */
 router.post('/', async function (req, res) {
   const newRecipe = req.body
+  console.log("add new recipe route, req:body ", req.body)
   await Recipe.create(newRecipe, (err, data) => {
      if (err) {
         console.error(err.errmsg)
@@ -53,5 +54,20 @@ router.post('/', async function (req, res) {
      }
   })
 });
+
+/* Delete One Recipe */
+router.delete('/', async function (req, res) {
+   const deleteRecipe = req.query
+   console.log("delete route req.query: ", req.query)
+   await Recipe.findByIdAndRemove(deleteRecipe, (err, data) => {
+      if (err) {
+         console.error(err.errmsg)
+         res.send(err)
+      } else {
+         console.log(data)
+         res.send(data)
+      }
+   })
+ });
 
 module.exports = router;
