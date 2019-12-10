@@ -102,7 +102,7 @@ class Signup extends Component {
                   horizontal: "left"
                }}
             />
-            <h1>Signup is up Man!</h1>
+            <h1>Signup</h1>
             <div className="Signup">
                <form onSubmit={this.handleSubmit} action="" method="post">
                   <div className="Signup-div-row">

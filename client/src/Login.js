@@ -9,13 +9,15 @@ class Login extends Component {
    constructor(props) {
       super(props)
       this.state = {
+         first: "",
+         last: "",
          username: "",
          password: "",
          passwordFromDB: "",
          _id: "",
          snackBarOpen: false,
          msg: "",
-         goodLogin: false
+         isLoggedIn: false
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -48,6 +50,8 @@ class Login extends Component {
                console.log("axios.get not in the db")
             } else {
                this.setState({
+                  first: response.data.first,
+                  last: response.data.last,
                   username: response.data.username,
                   passwordFromDB: response.data.password,
                   _id: response.data._id
@@ -66,11 +70,13 @@ class Login extends Component {
          })
          setTimeout(() => {
             this.setState({
-               goodLogin: true
+               isLoggedIn: true
             })
          }, 3000);
       } else {
          this.setState({
+            first: "",
+            last: "",
             username: "",
             password: "",
             passwordFromDB: "",
@@ -91,11 +97,16 @@ class Login extends Component {
          }, 2500);
       }
 
-      const { username, password, snackBarOpen, msg, goodLogin } = this.state
+      const { first, last, username, password, snackBarOpen, msg, isLoggedIn } = this.state
 
       return (
          <>
-         {goodLogin && <Redirect to="/recipes" />}
+         {isLoggedIn && <Redirect to={{
+            pathname: "/recipes",
+            state: {
+               referrer: `${first} ${last}`
+            }
+         }} />}
             <Snackbar
                open={snackBarOpen}
                variant="error"

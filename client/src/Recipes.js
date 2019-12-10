@@ -41,7 +41,8 @@ class Recipes extends Component {
             cooked_date: "",
             keywords: "",
             rating: 0
-         }]
+         }],
+         isLoggedIn: true
       }
       this.selectRecipe = this.selectRecipe.bind(this)
    }
@@ -102,7 +103,9 @@ class Recipes extends Component {
 
       return (
          <Fragment>
-            <NavBar />
+            <NavBar
+               isLoggedIn={this.state.isLoggedIn}
+            />
             <div className="main-container">
                <div className="left-side-container">
                   <SideRecipes
