@@ -7,7 +7,7 @@ function Landing() {
    return (
       <div>
          <NavBar />
-         <h1>Landing Page</h1>
+         <h1>Recipe App</h1>
          <Link
             className="Landing-button"
             to="/recipes"
