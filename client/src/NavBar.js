@@ -22,7 +22,6 @@ class NavBar extends Component {
 
       const { isLoggedIn } = this.state
       const { first, last } = this.props
-      console.log("In NavBar.js: ", first, " ", last)
 
       return (
          <div className="NavBar">
@@ -33,7 +32,7 @@ class NavBar extends Component {
             <div className="NavBar-right-side">
                { isLoggedIn ? "" : <Link to="/login" className="NavBar-Login-button">LOGIN</Link>}
                { isLoggedIn ? "" : <Link to="/signup" className="NavBar-SignUp-button">SIGN UP</Link>}
-               { isLoggedIn ? <Link className="NavBar-SignOut-button" onClick={this.toggleClick}>SIGN OUT</Link> : ""}
+               { isLoggedIn ? <Link to="/" className="NavBar-SignOut-button" onClick={this.toggleClick}>SIGN OUT</Link> : ""}
             </div>
          </div>
       )

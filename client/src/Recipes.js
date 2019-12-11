@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from "react-router-dom"
 import SideRecipes from "./SideRecipes"
+import Snackbar from '@material-ui/core/Snackbar';
 import axios from "axios"
 import "./Recipes.css"
 import NavBar from "./NavBar"
@@ -44,7 +45,10 @@ class Recipes extends Component {
             rating: 0
          }],
          isLoggedIn: true,
-         addRecipe: false
+         addRecipe: false,
+         goodDelete: false,
+         snackBarOpen: false,
+         msg: "",
       }
       this.selectRecipe = this.selectRecipe.bind(this)
       this.addRecipe = this.addRecipe.bind(this)
@@ -71,33 +75,54 @@ class Recipes extends Component {
       this.callAPI()
    }
 
-   addRecipe(){
+   addRecipe() {
       this.setState({
          addRecipe: true
       })
    }
-   
-   deleteRecipe(){
+
+   deleteRecipe() {
       axios.delete("http://localhost:9000/recipes", {
          params: {
             _id: this.state.chosenRecipe[0]._id
          }
       })
-      .then((response) => {
-         console.log(response)
-         if (response.data.name === "MongoError") {
-            // this.setState({
-            //    loggedInId: false,
-            //    snackBarOpen: true,
-            //    msg: "Those login credentials have already been used"
-            // })
-         } else {
-            // this.setState({
-            //    loggedInId: response.data._id
-            // })
-         }
-      })
-      .catch((err) => console.log(err))
+         .then((response) => {
+            console.log(response)
+            if (response.data.name === "MongoError") {
+               this.setState({
+                  snackBarOpen: true,
+                  msg: "Delete was not successfull"
+               })
+            } else {
+               this.setState({
+                  snackBarOpen: true,
+                  msg: "Delete was successful"
+               })
+               setTimeout(() => {
+                  this.setState({
+                     snackBarOpen: false,
+                     chosenRecipe: [{
+                        title: "",
+                        descriptions: "",
+                        author: "",
+                        website: "",
+                        url: "",
+                        image: "",
+                        servings: "",
+                        time: "",
+                        ingredients: [""],
+                        prep: [""],
+                        cooked: "",
+                        cooked_date: "",
+                        keywords: "",
+                        rating: 0
+                     }]
+                  })
+               }, 2500);
+            }
+         })
+         .catch((err) => console.log(err))
    }
 
    render() {
@@ -112,7 +137,6 @@ class Recipes extends Component {
       }
 
       const { title, ingredients, prep } = this.state.chosenRecipe[0]
-      console.log("ingredients: ", ingredients)
 
       const showIngredients = ingredients.map((ingredient) => {
          return (
@@ -134,14 +158,25 @@ class Recipes extends Component {
          )
       })
 
-      const { addRecipe } = this.state
+      const { addRecipe, snackBarOpen, msg, goodDelete } = this.state
 
       return (
          <Fragment>
+            <Snackbar
+               open={snackBarOpen}
+               variant="error"
+               className={"snackbar"}
+               message={msg}
+               anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left"
+               }}
+            />
             <NavBar
                isLoggedIn={this.state.isLoggedIn}
             />
-            {addRecipe && <Redirect to="/AddRecipe"/>}
+            {addRecipe && <Redirect to="/AddRecipe" />}
+            {goodDelete && <Redirect to="/recipes" />}
             <div className="main-container">
                <div className="left-side-container">
                   <SideRecipes

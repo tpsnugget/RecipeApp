@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import { Redirect } from "react-router-dom"
 import "./AddRecipe.css"
 import axios from "axios"
 
@@ -20,7 +21,8 @@ class AddRecipe extends Component {
          cooked: "",
          cooked_date: "",
          keywords: [""],
-         rating: 0
+         rating: 0,
+         addRecipeSuccessful: false
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
@@ -63,9 +65,9 @@ class AddRecipe extends Component {
                //    msg: "Those login credentials have already been used"
                // })
             } else {
-               // this.setState({
-               //    loggedInId: response.data._id
-               // })
+               this.setState({
+                  addRecipeSuccessful: true
+               })
             }
          })
          .catch((err) => console.log(err))
@@ -102,6 +104,7 @@ class AddRecipe extends Component {
 
       return (
          <div>
+            {this.state.addRecipeSuccessful && <Redirect to="/recipes" />}
             <form onSubmit={this.handleSubmit} action="" method="post">
                <h1>Add Recipe Page is up Man!</h1>
 
