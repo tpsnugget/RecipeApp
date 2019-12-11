@@ -108,11 +108,14 @@ class Recipes extends Component {
                } else {
                   this.setState({
                      snackBarOpen: true,
-                     msg: "Delete was successful"
+                     msg: "Delete was successful",
+                     goodDelete: true
                   })
                   setTimeout(() => {
                      this.setState({
                         snackBarOpen: false,
+                        msg: "",
+                        goodDelete: false,
                         chosenRecipe: [{
                            title: "",
                            descriptions: "",
@@ -130,6 +133,7 @@ class Recipes extends Component {
                            rating: 0
                         }]
                      })
+                     this.callAPI()
                   }, 2500);
                }
             })

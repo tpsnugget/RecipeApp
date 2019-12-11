@@ -23,7 +23,6 @@ class SideRecipes extends Component {
          return a.title.localeCompare(b.title)
       } )
 
-      console.log("data: ", data)
 
       const recipes = data.map((recipe, i) => {
          return (
