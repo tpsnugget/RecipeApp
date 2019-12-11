@@ -37,15 +37,12 @@ class Login extends Component {
          password: this.state.password
       }
 
-      console.log("userLoginData going to server: ", userLoginData)
-
       axios.get("http://localhost:9000/signup", {
          params: {
             username: this.state.username.toLowerCase()
          }
       })
          .then((response) => {
-            console.log("response from the server: ", response)
             if (response.data === "") {
                console.log("axios.get not in the db")
             } else {

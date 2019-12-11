@@ -18,6 +18,13 @@ class SideRecipes extends Component {
    render() {
       const { data } = this.props
 
+      // Sort the object by title
+      data.sort( (a, b) => {
+         return a.title.localeCompare(b.title)
+      } )
+
+      console.log("data: ", data)
+
       const recipes = data.map((recipe, i) => {
          return (
             <div key={recipe._id} id={recipe._id} className="recipe">
@@ -35,6 +42,7 @@ class SideRecipes extends Component {
             </div>
          )
       })
+
       return recipes
    }
 }
