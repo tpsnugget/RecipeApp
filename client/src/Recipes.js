@@ -82,47 +82,59 @@ class Recipes extends Component {
    }
 
    deleteRecipe() {
-      axios.delete("http://localhost:9000/recipes", {
-         params: {
-            _id: this.state.chosenRecipe[0]._id
-         }
-      })
-         .then((response) => {
-            console.log(response)
-            if (response.data.name === "MongoError") {
-               this.setState({
-                  snackBarOpen: true,
-                  msg: "Delete was not successfull"
-               })
-            } else {
-               this.setState({
-                  snackBarOpen: true,
-                  msg: "Delete was successful"
-               })
-               setTimeout(() => {
-                  this.setState({
-                     snackBarOpen: false,
-                     chosenRecipe: [{
-                        title: "",
-                        descriptions: "",
-                        author: "",
-                        website: "",
-                        url: "",
-                        image: "",
-                        servings: "",
-                        time: "",
-                        ingredients: [""],
-                        prep: [""],
-                        cooked: "",
-                        cooked_date: "",
-                        keywords: "",
-                        rating: 0
-                     }]
-                  })
-               }, 2500);
+      if(this.state.chosenRecipe[0].title === ""){
+         this.setState({
+            snackBarOpen: true,
+            msg: "You must select a recipe before it can be deleted"
+         })
+         setTimeout(() => {
+            this.setState({
+               snackBarOpen: false,
+               msg: ""
+            })
+         }, 2000);
+      } else {
+         axios.delete("http://localhost:9000/recipes", {
+            params: {
+               _id: this.state.chosenRecipe[0]._id
             }
          })
-         .catch((err) => console.log(err))
+            .then((response) => {
+               if (response.data.name === "MongoError") {
+                  this.setState({
+                     snackBarOpen: true,
+                     msg: "Delete was not successfull"
+                  })
+               } else {
+                  this.setState({
+                     snackBarOpen: true,
+                     msg: "Delete was successful"
+                  })
+                  setTimeout(() => {
+                     this.setState({
+                        snackBarOpen: false,
+                        chosenRecipe: [{
+                           title: "",
+                           descriptions: "",
+                           author: "",
+                           website: "",
+                           url: "",
+                           image: "",
+                           servings: "",
+                           time: "",
+                           ingredients: [""],
+                           prep: [""],
+                           cooked: "",
+                           cooked_date: "",
+                           keywords: "",
+                           rating: 0
+                        }]
+                     })
+                  }, 2500);
+               }
+            })
+            .catch((err) => console.log(err))
+      }
    }
 
    render() {
@@ -133,7 +145,7 @@ class Recipes extends Component {
          is one-level down in an array, and sometimes it is two-levels down
          in an array */
       {
-         Array.isArray(data) ? data = data : data = data.data
+         if(!Array.isArray(data)){data = data.data}
       }
 
       const { title, ingredients, prep } = this.state.chosenRecipe[0]

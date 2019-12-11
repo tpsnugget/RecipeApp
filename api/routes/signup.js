@@ -35,7 +35,6 @@ router.post('/', async function (req, res) {
 /* Get Login Data for One User */
 router.get('/', async function (req, res) {
    const userLogin = req.query
-   console.log("server req.query: ", userLogin)
    await User.findOne(userLogin, (err, data) => {
       if (err) {
          console.error(err.errmsg)

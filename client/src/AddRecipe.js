@@ -44,7 +44,7 @@ class AddRecipe extends Component {
          author: this.state.author,
          website: this.state.website,
          url: this.state.url,
-         image: this.state.iage,
+         image: this.state.image,
          servings: this.state.servings,
          time: this.state.time,
          ingredients: this.state.ingredients,
@@ -106,7 +106,7 @@ class AddRecipe extends Component {
          <div>
             {this.state.addRecipeSuccessful && <Redirect to="/recipes" />}
             <form onSubmit={this.handleSubmit} action="" method="post">
-               <h1>Add Recipe Page is up Man!</h1>
+               <h1>Add a New Recipe</h1>
 
                <div className="AddRecipe-div">
                   <label>Recipe Name:
