@@ -32,11 +32,6 @@ class Login extends Component {
    handleSubmit(e) {
       e.preventDefault()
 
-      const userLoginData = {
-         username: this.state.username.toLowerCase(),
-         password: this.state.password
-      }
-
       axios.get("http://localhost:9000/signup", {
          params: {
             username: this.state.username.toLowerCase()

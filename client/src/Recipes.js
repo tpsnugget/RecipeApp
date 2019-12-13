@@ -158,7 +158,7 @@ class Recipes extends Component {
          return (
             <Fragment>
                <p>
-                  {ingredient.amount} {ingredient.ingredient}
+                  {ingredient.amount} {ingredient.measure} {ingredient.ingredient}
                </p>
             </Fragment>
          )
@@ -168,7 +168,7 @@ class Recipes extends Component {
          return (
             <Fragment>
                <p><strong>Step {i + 1}:</strong>
-                  {step}
+                  {step.step}
                </p>
             </Fragment>
          )

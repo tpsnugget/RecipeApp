@@ -2,8 +2,9 @@ import React, { Component } from "react"
 import { Redirect } from "react-router-dom"
 import "./AddRecipe.css"
 import axios from "axios"
-import Snackbar from '@material-ui/core/Snackbar';
 import AddIngredients from "./AddIngredients"
+import AddPrep from "./AddPrep"
+import Keywords from "./Keywords"
 
 class AddRecipe extends Component {
 
@@ -19,7 +20,7 @@ class AddRecipe extends Component {
          servings: "",
          time: "",
          ingredients: [],
-         prep: [""],
+         prep: [],
          cooked: "",
          cooked_date: "",
          keywords: [""],
@@ -36,6 +37,8 @@ class AddRecipe extends Component {
       this.addPrep = this.addPrep.bind(this)
       this.cancel = this.cancel.bind(this)
       this.addIngredients = this.addIngredients.bind(this)
+      this.addPrep = this.addPrep.bind(this)
+      this.addKeywords = this.addKeywords.bind(this)
    }
 
    handleChange(e) {
@@ -57,7 +60,7 @@ class AddRecipe extends Component {
          servings: this.state.servings,
          time: this.state.time,
          ingredients: this.state.ingredients,
-         prep: [this.state.prep],
+         prep: this.state.prep,
          cooked: this.state.cooked,
          cooked_date: this.state.cooked_date,
          keywords: [this.state.keywords],
@@ -101,16 +104,6 @@ class AddRecipe extends Component {
       })
    }
 
-   addPrep(e) {
-      var newStep = [this.state.prep]
-      newStep.push(e.target.value)
-      console.log("prep is array: ", Array.isArray(newStep))
-      console.log("e.target.value: ", e.target.value)
-      this.setState({
-         prep: newStep
-      })
-   }
-
    cancel(){
       this.setState({cancel: true})
    }
@@ -119,9 +112,18 @@ class AddRecipe extends Component {
       this.setState({ingredients: e})
    }
 
+   addPrep(e){
+      this.setState({prep: e})
+   }
+
+   addKeywords(e){
+      console.log("addKeywords says: ", e)
+      this.setState({keywords: e})
+   }
+
    render() {
 
-      const { addRecipeSuccessful, recipeValidationError, cancel, goToAddIngredients } = this.state
+      const { addRecipeSuccessful, recipeValidationError, cancel } = this.state
 
       return (
          <div>
@@ -242,6 +244,8 @@ class AddRecipe extends Component {
                   </label>
 
                   <AddIngredients addIngredients={this.addIngredients}/>
+                  <AddPrep addPrep={this.addPrep}/>
+                  <Keywords addKeywords={this.addKeywords}/>
 
                   <button className="AddRecipe-submit-button">Add Recipe</button>
                </div>

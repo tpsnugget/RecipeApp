@@ -74,12 +74,12 @@ textarea, input {
 }
 
 .AddRecipe-submit-button {
-   width: 15%;
+   width: 156px;
    margin: 0;
 }
 
 .AddRecipe-addIngredients-button, .AddRecipe-cancel-button {
-   width: 191px;
+   width: 156px;
    display: flex;
    justify-content: center;
    margin-left: 2.5%;
