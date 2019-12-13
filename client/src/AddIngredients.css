@@ -1,0 +1,102 @@
+.AddIngredients-container {
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   margin: auto;
+}
+
+.AddIngredients-div {
+   margin-bottom: 2rem;
+   width: 40%;
+}
+
+.AddIngredients-array-div {
+   display: flex;
+}
+
+.AddIngredients-ingredients {
+   width: 35%;
+}
+
+.AddIngredients-ingredients {
+   width: 60%;
+}
+
+.AddIngredients-input-ingredient {
+   width: 450px;
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.AddIngredients-input-amount {
+   width: 150px;
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.AddIngredients-measure {
+   width: 150px;
+   height: 32px;
+   border: 2px solid lightgray;
+}
+
+.AddIngredients-input-measure {
+   width: 150px;
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.AddIngredients-textarea {
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.AddIngredients-textarea-description {
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.AddIngredients-label {
+   text-align: left;
+   font-size: 0.95rem;
+   font-weight: 600;
+   margin-bottom: 1rem;
+}
+
+textarea, input, select {
+   font-size: 0.95rem;
+   margin-top: 0.2rem;
+}
+
+.AddIngredients-two-columns {
+   width: 65%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.AddIngredients-right-column {
+   justify-content: right;
+}
+
+.AddIngredients-button-div {
+   display: flex;
+   align-items: center;
+}
+
+.AddIngredients-submit-button {
+   width: 15%;
+   height: 32px;
+   margin: 0;
+   margin-bottom: 1rem;
+}
+
+.AddIngredients-finished-button {
+   width: 20%;
+   height: 32px;
+   margin: 0 1rem;
+   margin-bottom: 1rem;
+}
