@@ -7,7 +7,10 @@ mongoose.connect("mongodb://localhost:27017/myInterestsDB",
   useUnifiedTopology: true})
 
 var recipeSchema = new mongoose.Schema({
-  title: String,
+  title: {
+     type: String,
+     required: true
+  },
   descriptions: String,
   author: String,
   website: String,
@@ -17,10 +20,7 @@ var recipeSchema = new mongoose.Schema({
   time: String,
   ingredients: Array,
   prep: Array,
-  cooked: Boolean,
-  cooked_date: Array,
-  keywords: Array,
-  rating: Number
+  keywords: Array
 })
 
 var Recipe = mongoose.model("Recipe", recipeSchema)

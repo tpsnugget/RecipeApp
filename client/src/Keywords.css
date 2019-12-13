@@ -1,0 +1,37 @@
+.Keywords-container {
+   width: 80%;
+   background-color: rgba(102, 51, 153, 0.1);
+   border: 1px solid rgba(102, 51, 153, 0.2);
+   padding: 0.5rem;
+   border-radius: 0.25rem;
+   margin-bottom: 1rem;
+}
+
+.Keywords-row {
+   display: flex;
+}
+
+.Keywords-div {
+   border: 1px solid lightgray;
+   width: 125px;
+   border-radius: 0.25rem;
+   padding: 0.5rem;
+   margin: 1rem 0.5rem;
+}
+
+
+.Keywords-div-input {
+   margin: 0.5rem;
+}
+
+.Keywords-input {
+   margin: 0.5rem 2rem;
+}
+
+.Keywords-button {
+   display: flex;
+   justify-content: left;
+   margin-top: 0;
+   margin-left: 0;
+   margin-bottom: 0;
+}
