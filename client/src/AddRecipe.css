@@ -1,12 +1,24 @@
-span {
-   border: 1px solid black;
-   border-radius: 0.25rem;
-   padding: 0.25rem 0.5rem;
-   margin-left: 1rem;
+.AddRecipe-container {
+   width: 95%;
+   display: flex;
+   flex-direction: column;
+   margin: auto;
+}
+
+.AddRecipe-h1 {
+   display: flex;
+   width: 100%;
+   height: 64px;
+   background-color: rgba(102, 51, 153, 0.8);
+   color: rgba(255, 255, 255, 0.8);
+   align-items: center;
+   justify-content: center;
+   margin-top: 0;
 }
 
 .AddRecipe-div {
    margin-bottom: 2rem;
+   width: 40%;
 }
 
 .AddRecipe-array-div {
@@ -19,4 +31,57 @@ span {
 
 .AddRecipe-ingredients {
    width: 60%;
+}
+
+.AddRecipe-input {
+   width: 350px;
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.AddRecipe-textarea {
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.AddRecipe-textarea-description {
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.AddRecipe-label {
+   text-align: left;
+   font-size: 0.95rem;
+   font-weight: 600;
+   margin-bottom: 1rem;
+}
+
+textarea, input {
+   font-size: 0.95rem;
+   margin-top: 0.2rem;
+}
+
+.AddRecipe-two-columns {
+   width: 65%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.AddRecipe-right-column {
+   justify-content: right;
+}
+
+.AddRecipe-submit-button {
+   width: 15%;
+   margin: 0;
+}
+
+.AddRecipe-cancel-button {
+   width: 191px;
+   display: flex;
+   justify-content: center;
+   margin-left: 2.5%;
+   margin-top: 1rem;
 }

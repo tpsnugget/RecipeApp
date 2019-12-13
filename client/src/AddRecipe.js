@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import { Redirect } from "react-router-dom"
 import "./AddRecipe.css"
 import axios from "axios"
+import Snackbar from '@material-ui/core/Snackbar';
 
 class AddRecipe extends Component {
 
@@ -22,11 +23,16 @@ class AddRecipe extends Component {
          cooked_date: "",
          keywords: [""],
          rating: 0,
-         addRecipeSuccessful: false
+         addRecipeSuccessful: false,
+         recipeValidationError: false,
+         snackBarOpen: false,
+         msg: "",
+         cancel: false
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
       this.addPrep = this.addPrep.bind(this)
+      this.cancel = this.cancel.bind(this)
    }
 
    handleChange(e) {
@@ -58,13 +64,15 @@ class AddRecipe extends Component {
       axios.post("http://localhost:9000/recipes", newRecipe)
          .then((response) => {
             console.log(response)
-            if (response.data.name === "MongoError") {
-               // this.setState({
-               //    loggedInId: false,
-               //    snackBarOpen: true,
-               //    msg: "Those login credentials have already been used"
-               // })
+            if (response.data._message === "Recipe validation failed") {
+               console.log("Running Recipe Validation Failed code")
+               this.setState({
+                  snackBarOpen: true,
+                  msg: "Recipe not added...",
+                  recipeValidationError: true
+               })
             } else {
+               console.log("Running addRecipe Successful code")
                this.setState({
                   addRecipeSuccessful: true
                })
@@ -100,90 +108,122 @@ class AddRecipe extends Component {
       })
    }
 
+   cancel(){
+      this.setState({cancel: true})
+   }
+
    render() {
+
+      const { addRecipeSuccessful, recipeValidationError, cancel } = this.state
 
       return (
          <div>
-            {this.state.addRecipeSuccessful && <Redirect to="/recipes" />}
+            {addRecipeSuccessful && <Redirect to="/recipes" />}
+            {recipeValidationError && <Redirect to="/recipes" />}
+            {cancel && <Redirect to="/recipes" />}
+
             <form onSubmit={this.handleSubmit} action="" method="post">
-               <h1>Add a New Recipe</h1>
 
-               <div className="AddRecipe-div">
-                  <label>Recipe Name:
-                  <input
-                        type="text"
-                        placeholder="Recipe Name"
-                        name="title"
-                        onChange={this.handleChange}>
-                     </input>
+               <h1 className="AddRecipe-h1">Add a New Recipe</h1>
+
+               <div className="AddRecipe-container">
+
+                  <label className="AddRecipe-label">Recipe Name:
+                  <div>
+                        <input
+                           className="AddRecipe-input"
+                           type="text"
+                           placeholder="Recipe Name"
+                           name="title"
+                           onChange={this.handleChange}>
+                        </input>
+                     </div>
                   </label>
 
-                  <label>Description:
-                  <textarea
-                        type="text"
-                        rows="5"
-                        cols="100"
-                        placeholder="Description"
-                        name="descriptions"
-                        onChange={this.handleChange}>
-                     </textarea>
-                  </label>
-               </div>
-
-               <div className="AddRecipe-div">
-                  <label>Author:
-                  <input
-                        type="text"
-                        placeholder="Author"
-                        name="author"
-                        onChange={this.handleChange}>
-                     </input>
+                  <label className="AddRecipe-label">Description:
+                  <div>
+                        <textarea
+                           className="AddRecipe-textarea-description"
+                           type="text"
+                           rows="10"
+                           cols="100"
+                           placeholder="Description"
+                           name="descriptions"
+                           onChange={this.handleChange}>
+                        </textarea>
+                     </div>
                   </label>
 
-                  <label>Website:
-                  <input
-                        type="text"
-                        placeholder="Website"
-                        name="website"
-                        onChange={this.handleChange}>
-                     </input>
+                  <div className="AddRecipe-two-columns">
+                     <label className="AddRecipe-label">Author:
+                     <div>
+                           <input
+                              className="AddRecipe-input"
+                              type="text"
+                              placeholder="Author"
+                              name="author"
+                              onChange={this.handleChange}>
+                           </input>
+                        </div>
+                     </label>
+
+                     <label className="AddRecipe-label">Website:
+                     <div>
+                           <input
+                              className="AddRecipe-input"
+                              type="text"
+                              placeholder="Website"
+                              name="website"
+                              onChange={this.handleChange}>
+                           </input>
+                        </div>
+                     </label>
+                  </div>
+
+                  <div className="AddRecipe-two-columns">
+                     <label className="AddRecipe-label">Servings:
+                     <div>
+                           <input
+                              className="AddRecipe-input"
+                              type="text"
+                              placeholder="Servings"
+                              name="servings"
+                              onChange={this.handleChange}>
+                           </input>
+                        </div>
+                     </label>
+
+                     <label className="AddRecipe-label">Time:
+                     <div>
+                           <input
+                              className="AddRecipe-input"
+                              type="text"
+                              placeholder="Time"
+                              name="time"
+                              onChange={this.handleChange}>
+                           </input>
+                        </div>
+                     </label>
+                  </div>
+
+                  <label className="AddRecipe-label">url:
+                     <div>
+                        <textarea
+                           className="AddRecipe-textarea"
+                           type="text"
+                           rows="1"
+                           cols="100"
+                           placeholder="url"
+                           name="url"
+                           onChange={this.handleChange}>
+                        </textarea>
+                     </div>
                   </label>
 
-                  <label>Servings:
-                  <input
-                        type="text"
-                        placeholder="Servings"
-                        name="servings"
-                        onChange={this.handleChange}>
-                     </input>
-                  </label>
-
-                  <label>Time:
-                     <input
-                        type="text"
-                        placeholder="Time"
-                        name="time"
-                        onChange={this.handleChange}>
-                     </input>
-                  </label>
-               </div>
-
-               <div className="AddRecipe-div">
-                  <label>url:
-                  <textarea
-                        type="text"
-                        rows="1"
-                        cols="100"
-                        placeholder="url"
-                        name="url"
-                        onChange={this.handleChange}>
-                     </textarea>
-                  </label>
-               </div>
-
-               <div className="AddRecipe-div">
-                  <label>image url:
-                  <textarea
+                  <label className="AddRecipe-label">image url:
+                     <div>
+                           <textarea
+                        className="AddRecipe-textarea"
                         type="text"
                         rows="1"
                         cols="100"
@@ -191,93 +231,12 @@ class AddRecipe extends Component {
                         name="image"
                         onChange={this.handleChange}>
                      </textarea>
+                     </div>
                   </label>
+                  <button className="AddRecipe-submit-button">Add Ingredients</button>
                </div>
-
-               <div className="AddRecipe-div">
-                  <p>Ingredients:</p>
-                  <label>Amount
-                     <input
-                        type="text"
-                        placeholder="Ingredient"
-                        name="ingredients"
-                        onChange={this.handleChange}>
-                     </input>
-                  </label>
-                  <label>Ingredient
-                     <input
-                        type="text"
-                        placeholder="Ingredient"
-                        name="ingredients"
-                        onChange={this.handleChange}>
-                     </input>
-                  </label>
-                  <span>Add another ingredient</span>
-               </div>
-
-               <div className="AddRecipe-div">
-                     <label>Prep:
-                     <input
-                           type="text"
-                           placeholder="Prep"
-                           name="prep"
-                           onChange={this.handleChange}>
-                        </input>
-                        <button onClick={this.addPrep}>Add another prep step</button>
-                     </label>
-               </div>
-
-               <div className="AddRecipe-div">
-                  <label>Cooked:
-                     <input
-                        type="text"
-                        placeholder="Yes or No"
-                        name="cooked"
-                        onChange={this.handleChange}>
-                     </input>
-                  </label>
-
-                  <label>Cooked Date:
-                     <input
-                        type="text"
-                        placeholder="Cooked Date"
-                        name="cooked_date"
-                        onChange={this.handleChange}>
-                     </input>
-                  </label>
-
-                  <label>Keywords:
-                     <input
-                        type="text"
-                        placeholder="Keywords"
-                        name="keywords"
-                        onChange={this.handleChange}>
-                     </input>
-                  </label>
-
-                  <label>Rating:
-                     <input
-                        type="text"
-                        placeholder="Rating"
-                        name="rating"
-                        onChange={this.handleChange}>
-                     </input>
-                  </label>
-               </div>
-               <button>Submit</button>
             </form>
-
-            <div className="AddRecipe-array-div">
-               <div className="AddRecipe-ingredients">
-                  <h3>Ingredients:</h3>
-                  {this.state.ingredient}
-               </div>
-               <div className="AddRecipe-pred">
-                  <h3>Prep Steps:</h3>
-                  {this.state.prep}
-               </div>
-            </div>
-
+            <button className="AddRecipe-cancel-button" onClick={this.cancel}>Cancel</button>
          </div>
       )
    }
