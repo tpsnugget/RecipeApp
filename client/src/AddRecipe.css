@@ -78,10 +78,10 @@ textarea, input {
    margin: 0;
 }
 
-.AddRecipe-cancel-button {
+.AddRecipe-addIngredients-button, .AddRecipe-cancel-button {
    width: 191px;
    display: flex;
    justify-content: center;
    margin-left: 2.5%;
-   margin-top: 1rem;
+   margin-bottom: 0.5rem;
 }

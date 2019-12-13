@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom"
 import "./AddRecipe.css"
 import axios from "axios"
 import Snackbar from '@material-ui/core/Snackbar';
+import AddIngredients from "./AddIngredients"
 
 class AddRecipe extends Component {
 
@@ -17,7 +18,7 @@ class AddRecipe extends Component {
          image: "",
          servings: "",
          time: "",
-         ingredients: [""],
+         ingredients: [],
          prep: [""],
          cooked: "",
          cooked_date: "",
@@ -27,12 +28,14 @@ class AddRecipe extends Component {
          recipeValidationError: false,
          snackBarOpen: false,
          msg: "",
-         cancel: false
+         cancel: false,
+         goToAddIngredients: false
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
       this.addPrep = this.addPrep.bind(this)
       this.cancel = this.cancel.bind(this)
+      this.addIngredients = this.addIngredients.bind(this)
    }
 
    handleChange(e) {
@@ -112,9 +115,13 @@ class AddRecipe extends Component {
       this.setState({cancel: true})
    }
 
+   addIngredients(e){
+      this.setState({ingredients: e})
+   }
+
    render() {
 
-      const { addRecipeSuccessful, recipeValidationError, cancel } = this.state
+      const { addRecipeSuccessful, recipeValidationError, cancel, goToAddIngredients } = this.state
 
       return (
          <div>
@@ -233,7 +240,10 @@ class AddRecipe extends Component {
                      </textarea>
                      </div>
                   </label>
-                  <button className="AddRecipe-submit-button">Add Ingredients</button>
+
+                  <AddIngredients addIngredients={this.addIngredients}/>
+
+                  <button className="AddRecipe-submit-button">Add Recipe</button>
                </div>
             </form>
             <button className="AddRecipe-cancel-button" onClick={this.cancel}>Cancel</button>
