@@ -9,24 +9,9 @@ class MainRecipe extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         chosenRecipe: [{
-            title: "",
-            descriptions: "",
-            author: "",
-            website: "",
-            url: "",
-            image: "",
-            servings: "",
-            time: "",
-            ingredients: [""],
-            prep: [""],
-            cooked: "",
-            cooked_date: "",
-            keywords: "",
-            rating: 0
-         }],
          isLoggedIn: true,
          addRecipe: false,
+         upDateRecipe: false,
          goodDelete: false,
          snackBarOpen: false,
          msg: "",
@@ -43,7 +28,9 @@ class MainRecipe extends Component {
    }
 
    updateRecipe() {
-
+      this.setState({
+         updateRecipe: true
+      })
    }
 
    deleteRecipe() {
@@ -81,22 +68,6 @@ class MainRecipe extends Component {
                         snackBarOpen: false,
                         msg: "",
                         goodDelete: false,
-                        chosenRecipe: [{
-                           title: "",
-                           descriptions: "",
-                           author: "",
-                           website: "",
-                           url: "",
-                           image: "",
-                           servings: "",
-                           time: "",
-                           ingredients: [""],
-                           prep: [""],
-                           cooked: "",
-                           cooked_date: "",
-                           keywords: "",
-                           rating: 0
-                        }]
                      })
                      this.props.callAPI()
                   }, 2500);
@@ -108,7 +79,7 @@ class MainRecipe extends Component {
 
    render() {
 
-      const { snackBarOpen, msg, addRecipe } = this.state
+      const { snackBarOpen, msg, addRecipe, updateRecipe } = this.state
       const { title, ingredients, prep, description, image } = this.props.data
 
       const showIngredients = ingredients.map((ingredient) => {
@@ -161,6 +132,10 @@ class MainRecipe extends Component {
       return (
          <Fragment>
             {addRecipe && <Redirect to="/AddRecipe" />}
+            {updateRecipe && <Redirect to={{
+                                             pathname: "/UpdateRecipe",
+                                             state: {id: this.props.data._id}
+            }} />}
             <Snackbar
                open={snackBarOpen}
                variant="error"
