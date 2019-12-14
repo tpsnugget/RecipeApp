@@ -52,9 +52,7 @@ class Recipes extends Component {
          msg: "",
       }
       this.selectRecipe = this.selectRecipe.bind(this)
-      this.addRecipe = this.addRecipe.bind(this)
-      this.deleteRecipe = this.deleteRecipe.bind(this)
-      this.updateRecipe = this.updateRecipe.bind(this)
+      this.callAPI = this.callAPI.bind(this)
    }
 
    selectRecipe(recipe) {
@@ -77,75 +75,6 @@ class Recipes extends Component {
       this.callAPI()
    }
 
-   addRecipe() {
-      this.setState({
-         addRecipe: true
-      })
-   }
-
-   updateRecipe(){
-      
-   }
-
-   deleteRecipe() {
-      if(this.state.chosenRecipe[0].title === ""){
-         this.setState({
-            snackBarOpen: true,
-            msg: "You must select a recipe before it can be deleted"
-         })
-         setTimeout(() => {
-            this.setState({
-               snackBarOpen: false,
-               msg: ""
-            })
-         }, 2000);
-      } else {
-         axios.delete("http://localhost:9000/recipes", {
-            params: {
-               _id: this.state.chosenRecipe[0]._id
-            }
-         })
-            .then((response) => {
-               if (response.data.name === "MongoError") {
-                  this.setState({
-                     snackBarOpen: true,
-                     msg: "Delete was not successfull"
-                  })
-               } else {
-                  this.setState({
-                     snackBarOpen: true,
-                     msg: "Delete was successful",
-                     goodDelete: true
-                  })
-                  setTimeout(() => {
-                     this.setState({
-                        snackBarOpen: false,
-                        msg: "",
-                        goodDelete: false,
-                        chosenRecipe: [{
-                           title: "",
-                           descriptions: "",
-                           author: "",
-                           website: "",
-                           url: "",
-                           image: "",
-                           servings: "",
-                           time: "",
-                           ingredients: [""],
-                           prep: [""],
-                           cooked: "",
-                           cooked_date: "",
-                           keywords: "",
-                           rating: 0
-                        }]
-                     })
-                     this.callAPI()
-                  }, 2500);
-               }
-            })
-            .catch((err) => console.log(err))
-      }
-   }
 
    render() {
 
@@ -160,40 +89,12 @@ class Recipes extends Component {
 
       const { title, ingredients, prep } = this.state.chosenRecipe[0]
 
-      const showIngredients = ingredients.map((ingredient) => {
-         return (
-            <Fragment>
-               <p>
-                  {ingredient.amount} {ingredient.measure} {ingredient.ingredient}
-               </p>
-            </Fragment>
-         )
-      })
 
-      const showPrep = prep.map((step, i) => {
-         return (
-            <Fragment>
-               <p><strong>Step {i + 1}:</strong>
-                  {step.step}
-               </p>
-            </Fragment>
-         )
-      })
 
       const { addRecipe, snackBarOpen, msg, goodDelete } = this.state
 
       return (
          <Fragment>
-            <Snackbar
-               open={snackBarOpen}
-               variant="error"
-               className={"snackbar"}
-               message={msg}
-               anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left"
-               }}
-            />
             <NavBar
                isLoggedIn={this.state.isLoggedIn}
             />
@@ -207,23 +108,9 @@ class Recipes extends Component {
                   />
                </div>
                <div className="right-side-container">
-               <MainRecipe data={this.state.chosenRecipe[0]} />
-                  <button onClick={this.addRecipe}>Add Recipe</button>
-                  <button onClick={this.updateRecipe}>Edit Recipe</button>
-                  <button onClick={this.deleteRecipe}>Delete Recipe</button>
-                  {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}
-                  <p className="description">{this.state.chosenRecipe[0].description}</p>
-                  <img src={this.state.chosenRecipe[0].image} alt={this.state.chosenRecipe[0].title} />
-                  <div className="right-side-inner-container">
-                     <div className="right-side-ingredients">
-                        {title !== "" ? <h4>Ingredients:</h4> : ""}
-                        {showIngredients}
-                     </div>
-                     <div className="right-side-prep">
-                        {title !== "" ? <h4>Prep:</h4> : ""}
-                        {title !== "" ? showPrep : ""}
-                     </div>
-                  </div>
+               <MainRecipe data={this.state.chosenRecipe[0]} callAPI={this.callAPI} />
+
+
                </div>
             </div >
          </Fragment>
