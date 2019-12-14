@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from "react-router-dom"
 import SideRecipes from "./SideRecipes"
+import MainRecipe from "./MainRecipe"
 import Snackbar from '@material-ui/core/Snackbar';
 import axios from "axios"
 import "./Recipes.css"
@@ -14,7 +15,7 @@ class Recipes extends Component {
          data:
             [{
                title: "",
-               descriptions: "",
+               description: "",
                author: "",
                website: "",
                url: "",
@@ -30,7 +31,7 @@ class Recipes extends Component {
             }],
          chosenRecipe: [{
             title: "",
-            descriptions: "",
+            description: "",
             author: "",
             website: "",
             url: "",
@@ -53,6 +54,7 @@ class Recipes extends Component {
       this.selectRecipe = this.selectRecipe.bind(this)
       this.addRecipe = this.addRecipe.bind(this)
       this.deleteRecipe = this.deleteRecipe.bind(this)
+      this.updateRecipe = this.updateRecipe.bind(this)
    }
 
    selectRecipe(recipe) {
@@ -64,7 +66,7 @@ class Recipes extends Component {
    async callAPI() {
       try {
          this.setState({
-            data: await axios.get("http://localhost:9000/recipes")
+            data: await axios.get("http://localhost:9000/recipes", {})
          })
       } catch (error) {
          console.error(error)
@@ -79,6 +81,10 @@ class Recipes extends Component {
       this.setState({
          addRecipe: true
       })
+   }
+
+   updateRecipe(){
+      
    }
 
    deleteRecipe() {
@@ -201,8 +207,9 @@ class Recipes extends Component {
                   />
                </div>
                <div className="right-side-container">
+               <MainRecipe data={this.state.chosenRecipe[0]} />
                   <button onClick={this.addRecipe}>Add Recipe</button>
-                  <button>Edit Recipe</button>
+                  <button onClick={this.updateRecipe}>Edit Recipe</button>
                   <button onClick={this.deleteRecipe}>Delete Recipe</button>
                   {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}
                   <p className="description">{this.state.chosenRecipe[0].description}</p>

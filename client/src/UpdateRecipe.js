@@ -1,12 +1,12 @@
 import React, { Component } from "react"
 import { Redirect } from "react-router-dom"
-import "./AddRecipe.css"
+import "./UpdateRecipe.css"
 import axios from "axios"
 import AddIngredients from "./AddIngredients"
 import AddPrep from "./AddPrep"
 import Keywords from "./Keywords"
 
-class AddRecipe extends Component {
+class UpdateRecipe extends Component {
 
    constructor(props) {
       super(props)
@@ -133,14 +133,14 @@ class AddRecipe extends Component {
 
             <form onSubmit={this.handleSubmit} action="" method="post">
 
-               <h1 className="AddRecipe-h1">Add a New Recipe</h1>
+               <h1 className="UpdateRecipe-h1">Add a New Recipe</h1>
 
-               <div className="AddRecipe-container">
+               <div className="UpdateRecipe-container">
 
-                  <label className="AddRecipe-label">Recipe Name:
+                  <label className="UpdateRecipe-label">Recipe Name:
                   <div>
                         <input
-                           className="AddRecipe-input"
+                           className="UpdateRecipe-input"
                            type="text"
                            placeholder="Recipe Name"
                            name="title"
@@ -149,10 +149,10 @@ class AddRecipe extends Component {
                      </div>
                   </label>
 
-                  <label className="AddRecipe-label">Description:
+                  <label className="UpdateRecipe-label">Description:
                   <div>
                         <textarea
-                           className="AddRecipe-textarea-description"
+                           className="UpdateRecipe-textarea-description"
                            type="text"
                            rows="10"
                            cols="100"
@@ -163,11 +163,11 @@ class AddRecipe extends Component {
                      </div>
                   </label>
 
-                  <div className="AddRecipe-two-columns">
-                     <label className="AddRecipe-label">Author:
+                  <div className="UpdateRecipe-two-columns">
+                     <label className="UpdateRecipe-label">Author:
                      <div>
                            <input
-                              className="AddRecipe-input"
+                              className="UpdateRecipe-input"
                               type="text"
                               placeholder="Author"
                               name="author"
@@ -176,10 +176,10 @@ class AddRecipe extends Component {
                         </div>
                      </label>
 
-                     <label className="AddRecipe-label">Website:
+                     <label className="UpdateRecipe-label">Website:
                      <div>
                            <input
-                              className="AddRecipe-input"
+                              className="UpdateRecipe-input"
                               type="text"
                               placeholder="Website"
                               name="website"
@@ -189,11 +189,11 @@ class AddRecipe extends Component {
                      </label>
                   </div>
 
-                  <div className="AddRecipe-two-columns">
-                     <label className="AddRecipe-label">Servings:
+                  <div className="UpdateRecipe-two-columns">
+                     <label className="UpdateRecipe-label">Servings:
                      <div>
                            <input
-                              className="AddRecipe-input"
+                              className="UpdateRecipe-input"
                               type="text"
                               placeholder="Servings"
                               name="servings"
@@ -202,10 +202,10 @@ class AddRecipe extends Component {
                         </div>
                      </label>
 
-                     <label className="AddRecipe-label">Time:
+                     <label className="UpdateRecipe-label">Time:
                      <div>
                            <input
-                              className="AddRecipe-input"
+                              className="UpdateRecipe-input"
                               type="text"
                               placeholder="Time"
                               name="time"
@@ -215,10 +215,10 @@ class AddRecipe extends Component {
                      </label>
                   </div>
 
-                  <label className="AddRecipe-label">url:
+                  <label className="UpdateRecipe-label">url:
                      <div>
                         <textarea
-                           className="AddRecipe-textarea"
+                           className="UpdateRecipe-textarea"
                            type="text"
                            rows="1"
                            cols="100"
@@ -229,10 +229,10 @@ class AddRecipe extends Component {
                      </div>
                   </label>
 
-                  <label className="AddRecipe-label">image url:
+                  <label className="UpdateRecipe-label">image url:
                      <div>
                            <textarea
-                        className="AddRecipe-textarea"
+                        className="UpdateRecipe-textarea"
                         type="text"
                         rows="1"
                         cols="100"
@@ -247,13 +247,13 @@ class AddRecipe extends Component {
                   <AddPrep addPrep={this.addPrep}/>
                   <Keywords addKeywords={this.addKeywords}/>
 
-                  <button className="AddRecipe-submit-button">Add Recipe</button>
+                  <button className="UpdateRecipe-submit-button">Add Recipe</button>
                </div>
             </form>
-            <button className="AddRecipe-cancel-button" onClick={this.cancel}>Cancel</button>
+            <button className="UpdateRecipe-cancel-button" onClick={this.cancel}>Cancel</button>
          </div>
       )
    }
 }
 
-export default AddRecipe
+export default UpdateRecipe

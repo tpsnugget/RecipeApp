@@ -11,7 +11,7 @@ var recipeSchema = new mongoose.Schema({
      type: String,
      required: true
   },
-  descriptions: String,
+  description: String,
   author: String,
   website: String,
   url: String,
@@ -27,7 +27,7 @@ var Recipe = mongoose.model("Recipe", recipeSchema)
 
 /* Get All Recipes */
 router.get('/', async function(req, res) {
-   await Recipe.find({}, (err, data) => {
+   await Recipe.find(req.query, (err, data) => {
     //  console.log("req is: ", req)
     //  console.log("res is: ", res)
     // console.log(params) throws an error

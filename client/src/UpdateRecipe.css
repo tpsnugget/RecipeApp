@@ -1,0 +1,87 @@
+.UpdateRecipe-container {
+   width: 95%;
+   display: flex;
+   flex-direction: column;
+   margin: auto;
+}
+
+.UpdateRecipe-h1 {
+   display: flex;
+   width: 100%;
+   height: 64px;
+   background-color: rgba(102, 51, 153, 0.8);
+   color: rgba(255, 255, 255, 0.8);
+   align-items: center;
+   justify-content: center;
+   margin-top: 0;
+}
+
+.UpdateRecipe-div {
+   margin-bottom: 2rem;
+   width: 40%;
+}
+
+.UpdateRecipe-array-div {
+   display: flex;
+}
+
+.UpdateRecipe-ingredients {
+   width: 35%;
+}
+
+.UpdateRecipe-ingredients {
+   width: 60%;
+}
+
+.UpdateRecipe-input {
+   width: 350px;
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.UpdateRecipe-textarea {
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.UpdateRecipe-textarea-description {
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.UpdateRecipe-label {
+   text-align: left;
+   font-size: 0.95rem;
+   font-weight: 600;
+   margin-bottom: 1rem;
+}
+
+textarea, input {
+   font-size: 0.95rem;
+   margin-top: 0.2rem;
+}
+
+.UpdateRecipe-two-columns {
+   width: 65%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.UpdateRecipe-right-column {
+   justify-content: right;
+}
+
+.UpdateRecipe-submit-button {
+   width: 156px;
+   margin: 0;
+}
+
+.UpdateRecipe-addIngredients-button, .UpdateRecipe-cancel-button {
+   width: 156px;
+   display: flex;
+   justify-content: center;
+   margin-left: 2.5%;
+   margin-bottom: 0.5rem;
+}
