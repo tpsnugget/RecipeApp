@@ -33,8 +33,8 @@ class Signup extends Component {
       e.preventDefault()
 
       // send the data somewhere
-      if (this.state.first === "" || this.state.last === ""     || this.state.username === "" ||
-         this.state.email === ""  || this.state.password === "" || this.state.password2 === "") {
+      if (this.state.first === "" || this.state.last === "" || this.state.username === "" ||
+         this.state.email === "" || this.state.password === "" || this.state.password2 === "") {
          this.setState({
             snackBarOpen: true,
             msg: "Entries not allowed to be empty, please try again"
@@ -102,77 +102,89 @@ class Signup extends Component {
                   horizontal: "left"
                }}
             />
-            <h1>Signup</h1>
+
             <div className="Signup">
-               <form onSubmit={this.handleSubmit} action="" method="post">
-                  <div className="Signup-div-row">
-                     <label>First Name:
-                  <input className="Signup-input-column-one"
-                           type="text"
-                           placeholder="First Name"
-                           name="first"
-                           value={first}
-                           onChange={this.handleChange}
-                        />
-                     </label>
-                     <label>Last Name:
-                  <input
-                           type="text"
-                           placeholder="Last Name"
-                           name="last"
-                           value={last}
-                           onChange={this.handleChange}
-                        />
-                     </label>
-                  </div>
+               <h1 className="Signup-h1">Signup</h1>
 
-                  <div className="Signup-div-row">
-                     <label>Username:
-                  <input className="Signup-input-column-one"
-                           type="text"
-                           placeholder="Username"
-                           name="username"
-                           value={username}
-                           onChange={this.handleChange}
-                        />
-                     </label>
-                     <label>Email:
-                  <input
-                           type="email"
-                           placeholder="Email"
-                           name="email"
-                           value={email}
-                           onChange={this.handleChange}
-                        />
-                     </label>
-                  </div>
+               <div className="Signup-container">
 
-                  <div className="Signup-div-row">
-                     <label>Password:
-                  <input className="Signup-input-column-one"
-                           type="password"
-                           placeholder="Password"
-                           name="password"
-                           value={password}
-                           onChange={this.handleChange}
-                        />
-                     </label>
-                     <label>Password:
-                  <input
-                           type="password"
-                           placeholder="Password"
-                           name="password2"
-                           value={password2}
-                           onChange={this.handleChange}
-                        />
-                     </label>
-                  </div>
-                  <button>Submit</button>
-                  <Link
-                     to="/"
-                     className="Signup-button"
-                  >Cancel</Link>
-               </form>
+                  <form onSubmit={this.handleSubmit} action="" method="post">
+
+                     <div className="Signup-div-row">
+                        <label className="Signup-label">First Name:
+                           <div>
+                              <input className="Signup-input"
+                                 type="text"
+                                 placeholder="First Name"
+                                 name="first"
+                                 value={first}
+                                 onChange={this.handleChange}
+                              />
+                           </div>
+                        </label>
+
+                        <label className="Signup-label">Last Name:
+                           <div>
+                              <input className="Signup-input"
+                                 type="text"
+                                 placeholder="Last Name"
+                                 name="last"
+                                 value={last}
+                                 onChange={this.handleChange}
+                              />
+                           </div>
+                        </label>
+                     </div>
+
+                     <div className="Signup-div-row">
+                        <label className="Signup-label">Username:
+                  <input className="Signup-input"
+                              type="text"
+                              placeholder="Username"
+                              name="username"
+                              value={username}
+                              onChange={this.handleChange}
+                           />
+                        </label>
+                        <label className="Signup-label">Email:
+                           <input className="Signup-input"
+                              type="email"
+                              placeholder="Email"
+                              name="email"
+                              value={email}
+                              onChange={this.handleChange}
+                           />
+                        </label>
+                     </div>
+
+                     <div className="Signup-div-row">
+                        <label className="Signup-label">Password:
+                  <input className="Signup-input"
+                              type="password"
+                              placeholder="Password"
+                              name="password"
+                              value={password}
+                              onChange={this.handleChange}
+                           />
+                        </label>
+                        <label className="Signup-label">Password:
+                           <input className="Signup-input"
+                              type="password"
+                              placeholder="Password"
+                              name="password2"
+                              value={password2}
+                              onChange={this.handleChange}
+                           />
+                        </label>
+                     </div>
+                     <button>Submit</button>
+                     <Link
+                        to="/"
+                        className="Signup-button"
+                     >Cancel</Link>
+
+                  </form>
+               </div>
             </div>
          </Fragment>
       )

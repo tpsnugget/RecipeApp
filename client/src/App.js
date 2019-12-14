@@ -17,8 +17,6 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path="/recipes/:id" component={Show}>
-          </Route>
           <Route exact path="/AddRecipe">
             <AddRecipe />
           </Route>
