@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom"
 import Recipes from "./Recipes"
-import Show from "./Show"
 import Users from "./Users"
 import Landing from "./Landing"
 import Error from "./Error"
 import Signup from "./Signup"
 import Login from "./Login"
 import AddRecipe from "./AddRecipe"
+import UpdateRecipe from "./UpdateRecipe"
 import AddIngredients from "./AddIngredients"
 import './App.css';
 
@@ -19,6 +19,9 @@ class App extends Component {
         <Switch>
           <Route exact path="/AddRecipe">
             <AddRecipe />
+          </Route>
+          <Route exact path="/UpdateRecipe" component={UpdateRecipe}>
+
           </Route>
           <Route exact path="/addIngredients">
             <AddIngredients />

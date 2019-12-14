@@ -11,20 +11,23 @@ class UpdateRecipe extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         title: "",
-         description: "",
-         author: "",
-         website: "",
-         url: "",
-         image: "",
-         servings: "",
-         time: "",
-         ingredients: [],
-         prep: [],
-         cooked: "",
-         cooked_date: "",
-         keywords: [""],
-         rating: 0,
+         data:
+            [{
+               title: "",
+               description: "",
+               author: "",
+               website: "",
+               url: "",
+               image: "",
+               servings: "",
+               time: "",
+               ingredients: "",
+               prep: "",
+               cooked: "",
+               cooked_date: "",
+               keywords: "",
+               rating: 0
+            }],
          addRecipeSuccessful: false,
          recipeValidationError: false,
          snackBarOpen: false,
@@ -39,6 +42,43 @@ class UpdateRecipe extends Component {
       this.addIngredients = this.addIngredients.bind(this)
       this.addPrep = this.addPrep.bind(this)
       this.addKeywords = this.addKeywords.bind(this)
+   }
+
+   async callAPI() {
+      axios.get("http://localhost:9000/recipes", {
+         params: {
+            _id: this.props.location.state.id
+         }
+      })
+         .then((response) => {
+            if (response.data === "") {
+               console.log("axios.get not in the db")
+            } else {
+               console.log("axios.get from Update Recipe: ", response)
+               this.setState({
+                  title: response.data[0].title,
+                  description: response.data[0].description,
+                  author: response.data[0].author,
+                  website: response.data[0].website,
+                  url: response.data[0].url,
+                  image: response.data[0].image,
+                  servings: response.data[0].servings,
+                  time: response.data[0].time,
+                  ingredients: response.data[0].ingredients,
+                  prep: response.data[0].prep,
+                  cooked: "",
+                  cooked_date: "",
+                  keywords: response.data[0].keywords,
+                  rating: 0
+               })
+               this.checkForGoodLogin()
+            }
+         })
+         .catch((err) => console.log(err))
+   }
+
+   componentDidMount() {
+      this.callAPI()
    }
 
    handleChange(e) {
@@ -104,26 +144,29 @@ class UpdateRecipe extends Component {
       })
    }
 
-   cancel(){
-      this.setState({cancel: true})
+   cancel() {
+      this.setState({ cancel: true })
    }
 
-   addIngredients(e){
-      this.setState({ingredients: e})
+   addIngredients(e) {
+      this.setState({ ingredients: e })
    }
 
-   addPrep(e){
-      this.setState({prep: e})
+   addPrep(e) {
+      this.setState({ prep: e })
    }
 
-   addKeywords(e){
+   addKeywords(e) {
       console.log("addKeywords says: ", e)
-      this.setState({keywords: e})
+      this.setState({ keywords: e })
    }
 
    render() {
 
       const { addRecipeSuccessful, recipeValidationError, cancel } = this.state
+      const { title, description, author, website, servings, time, url, image } = this.state
+
+      console.log("this.state: ", this.state)
 
       return (
          <div>
@@ -133,7 +176,7 @@ class UpdateRecipe extends Component {
 
             <form onSubmit={this.handleSubmit} action="" method="post">
 
-               <h1 className="UpdateRecipe-h1">Add a New Recipe</h1>
+               <h1 className="UpdateRecipe-h1">Update Recipe</h1>
 
                <div className="UpdateRecipe-container">
 
@@ -142,7 +185,7 @@ class UpdateRecipe extends Component {
                         <input
                            className="UpdateRecipe-input"
                            type="text"
-                           placeholder="Recipe Name"
+                           value={title}
                            name="title"
                            onChange={this.handleChange}>
                         </input>
@@ -156,7 +199,7 @@ class UpdateRecipe extends Component {
                            type="text"
                            rows="10"
                            cols="100"
-                           placeholder="Description"
+                           value={description}
                            name="descriptions"
                            onChange={this.handleChange}>
                         </textarea>
@@ -169,7 +212,7 @@ class UpdateRecipe extends Component {
                            <input
                               className="UpdateRecipe-input"
                               type="text"
-                              placeholder="Author"
+                              value={author}
                               name="author"
                               onChange={this.handleChange}>
                            </input>
@@ -181,7 +224,7 @@ class UpdateRecipe extends Component {
                            <input
                               className="UpdateRecipe-input"
                               type="text"
-                              placeholder="Website"
+                              value={website}
                               name="website"
                               onChange={this.handleChange}>
                            </input>
@@ -195,7 +238,7 @@ class UpdateRecipe extends Component {
                            <input
                               className="UpdateRecipe-input"
                               type="text"
-                              placeholder="Servings"
+                              value={servings}
                               name="servings"
                               onChange={this.handleChange}>
                            </input>
@@ -207,7 +250,7 @@ class UpdateRecipe extends Component {
                            <input
                               className="UpdateRecipe-input"
                               type="text"
-                              placeholder="Time"
+                              value={time}
                               name="time"
                               onChange={this.handleChange}>
                            </input>
@@ -222,7 +265,7 @@ class UpdateRecipe extends Component {
                            type="text"
                            rows="1"
                            cols="100"
-                           placeholder="url"
+                           value={url}
                            name="url"
                            onChange={this.handleChange}>
                         </textarea>
@@ -231,21 +274,21 @@ class UpdateRecipe extends Component {
 
                   <label className="UpdateRecipe-label">image url:
                      <div>
-                           <textarea
-                        className="UpdateRecipe-textarea"
-                        type="text"
-                        rows="1"
-                        cols="100"
-                        placeholder="image url"
-                        name="image"
-                        onChange={this.handleChange}>
-                     </textarea>
+                        <textarea
+                           className="UpdateRecipe-textarea"
+                           type="text"
+                           rows="1"
+                           cols="100"
+                           value={image}
+                           name="image"
+                           onChange={this.handleChange}>
+                        </textarea>
                      </div>
                   </label>
 
-                  <AddIngredients addIngredients={this.addIngredients}/>
-                  <AddPrep addPrep={this.addPrep}/>
-                  <Keywords addKeywords={this.addKeywords}/>
+                  <AddIngredients addIngredients={this.addIngredients} />
+                  <AddPrep addPrep={this.addPrep} />
+                  <Keywords addKeywords={this.addKeywords} />
 
                   <button className="UpdateRecipe-submit-button">Add Recipe</button>
                </div>

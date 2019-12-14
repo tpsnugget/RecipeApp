@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Redirect } from "react-router-dom"
 import SideRecipes from "./SideRecipes"
 import MainRecipe from "./MainRecipe"
-import Snackbar from '@material-ui/core/Snackbar';
 import axios from "axios"
 import "./Recipes.css"
 import NavBar from "./NavBar"
@@ -47,7 +45,6 @@ class Recipes extends Component {
          }],
          isLoggedIn: true,
          addRecipe: false,
-         goodDelete: false,
          snackBarOpen: false,
          msg: "",
       }
@@ -102,8 +99,6 @@ class Recipes extends Component {
       {
          if(!Array.isArray(data)){data = data.data}
       }
-
-      const { goodDelete } = this.state
 
       return (
          <Fragment>
