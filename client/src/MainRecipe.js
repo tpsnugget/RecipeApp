@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react"
+import { Redirect } from "react-router-dom"
 import "./MainRecipe.css"
 import axios from "axios"
 import Snackbar from '@material-ui/core/Snackbar';
@@ -105,10 +106,9 @@ class MainRecipe extends Component {
       }
    }
 
-
    render() {
 
-      const { snackBarOpen, msg } = this.state
+      const { snackBarOpen, msg, addRecipe } = this.state
       const { title, ingredients, prep, description, image } = this.props.data
 
       const showIngredients = ingredients.map((ingredient) => {
@@ -131,23 +131,12 @@ class MainRecipe extends Component {
          )
       })
 
-      return (
-         <Fragment>
-            <Snackbar
-               open={snackBarOpen}
-               variant="error"
-               className={"snackbar"}
-               message={msg}
-               anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left"
-               }}
-            />
-            <button onClick={this.addRecipe}>Add Recipe</button>
-            <button onClick={this.updateRecipe}>Edit Recipe</button>
-            <button onClick={this.deleteRecipe}>Delete Recipe</button>
+      var display = ""
 
-            {title !== "" ? <h1>{title}</h1> : (<><h1>Main Recipe Page</h1> <h2>Click on a Recipe to the Left for More Information</h2></>)}
+      if(title !== ""){
+         display = 
+         <Fragment>
+            <h1>{title}</h1>
             <p className="description">{description}</p>
             <img src={image} alt={title} />
             <div className="right-side-inner-container">
@@ -160,7 +149,31 @@ class MainRecipe extends Component {
                   {title !== "" ? showPrep : ""}
                </div>
             </div>
+         </Fragment>
+      } else {
+         display = 
+         <Fragment>
+            <h1>Main Recipe Page</h1>
+            <h2>Click on a Recipe to the Left for More Information</h2>
+         </Fragment>
+      }
 
+      return (
+         <Fragment>
+            {addRecipe && <Redirect to="/AddRecipe" />}
+            <Snackbar
+               open={snackBarOpen}
+               variant="error"
+               className={"snackbar"}
+               message={msg}
+               anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left"}}
+            />
+            <button onClick={this.addRecipe}>Add Recipe</button>
+            <button onClick={this.updateRecipe}>Edit Recipe</button>
+            <button onClick={this.deleteRecipe}>Delete Recipe</button>
+            {display}
          </Fragment>
       )
    }

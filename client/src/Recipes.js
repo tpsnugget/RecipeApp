@@ -64,7 +64,23 @@ class Recipes extends Component {
    async callAPI() {
       try {
          this.setState({
-            data: await axios.get("http://localhost:9000/recipes", {})
+            data: await axios.get("http://localhost:9000/recipes", {}),
+            chosenRecipe: [{
+               title: "",
+               description: "",
+               author: "",
+               website: "",
+               url: "",
+               image: "",
+               servings: "",
+               time: "",
+               ingredients: [""],
+               prep: [""],
+               cooked: "",
+               cooked_date: "",
+               keywords: "",
+               rating: 0
+            }]
          })
       } catch (error) {
          console.error(error)
@@ -87,19 +103,13 @@ class Recipes extends Component {
          if(!Array.isArray(data)){data = data.data}
       }
 
-      const { title, ingredients, prep } = this.state.chosenRecipe[0]
-
-
-
-      const { addRecipe, snackBarOpen, msg, goodDelete } = this.state
+      const { goodDelete } = this.state
 
       return (
          <Fragment>
             <NavBar
                isLoggedIn={this.state.isLoggedIn}
             />
-            {addRecipe && <Redirect to="/AddRecipe" />}
-            {goodDelete && <Redirect to="/recipes" />}
             <div className="main-container">
                <div className="left-side-container">
                   <SideRecipes
@@ -109,8 +119,6 @@ class Recipes extends Component {
                </div>
                <div className="right-side-container">
                <MainRecipe data={this.state.chosenRecipe[0]} callAPI={this.callAPI} />
-
-
                </div>
             </div >
          </Fragment>
