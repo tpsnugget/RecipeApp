@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import "./Keywords.css"
 
-class Keywords extends Component {
+class UpdateKeywords extends Component {
 
    constructor(props) {
       super(props)
@@ -42,7 +42,12 @@ class Keywords extends Component {
 
    render() {
 
-      
+      const { beans, cheese, entree, instantPot, meat, onion, pasta, poultry,
+              rice, risotto, saucesAndGravies, sideDish, slowCooker, squash } = this.props
+
+      console.log("UpdateKeywords Component: this.props", this.props)
+      console.log("UpdateKeywords Component: this.props.data", this.props.data)
+      // console.log("UpdateKeywords Component: this.props.instantPot: ", this.props.instantPot)
 
       return (
          <div className="Keywords-container">
@@ -52,7 +57,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Beans
                <div className="Keywords-div-input">
-                           <input type="checkbox" name="beans" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={beans} type="checkbox" name="beans" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -60,7 +65,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Cheese
                <div className="Keywords-div-input">
-                           <input type="checkbox" name="cheese" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={cheese} type="checkbox" name="cheese" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -68,7 +73,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Entree
                <div className="Keywords-div-input">
-                           <input type="checkbox" name="entree" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={entree} type="checkbox" name="entree" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -76,7 +81,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Instant Pot
                <div>
-                           <input type="checkbox" name="instantPot" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={instantPot} type="checkbox" name="instantPot" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -84,7 +89,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Meat
                <div>
-                           <input type="checkbox" name="meat" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={meat} type="checkbox" name="meat" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -92,7 +97,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Onion
                <div>
-                           <input type="checkbox" name="onion" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={onion} type="checkbox" name="onion" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -100,7 +105,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Pasta
                <div>
-                           <input type="checkbox" name="pasta" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={pasta} type="checkbox" name="pasta" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -110,7 +115,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Poultry
                <div>
-                           <input type="checkbox" name="poultry" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={poultry} type="checkbox" name="poultry" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -118,7 +123,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Rice
                <div>
-                           <input type="checkbox" name="rice" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={rice} type="checkbox" name="rice" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -126,7 +131,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Risotto
                <div>
-                           <input type="checkbox" name="risotto" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={risotto} type="checkbox" name="risotto" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -134,7 +139,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Sauces/Gravies
                <div>
-                           <input type="checkbox" name="saucesAndGravies" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={saucesAndGravies} type="checkbox" name="saucesAndGravies" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -142,7 +147,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Side Dish
                <div>
-                           <input type="checkbox" name="sideDish" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={sideDish} type="checkbox" name="sideDish" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -150,7 +155,7 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Slow Cooker
                <div>
-                           <input type="checkbox" name="slowCooker" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={slowCooker} type="checkbox" name="slowCooker" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
@@ -158,12 +163,12 @@ class Keywords extends Component {
                   <div className="Keywords-div">
                      <label>Squash
                <div>
-                           <input type="checkbox" name="squash" onClick={this.handleClick} className="Keywords-input" />
+                           <input checked={squash} type="checkbox" name="squash" onClick={this.handleClick} className="Keywords-input" />
                         </div>
                      </label>
                   </div>
                </div>
-               <button className="Keywords-button">Submit Keywords</button>
+               <button className="Keywords-button">Update Keywords</button>
             </form>
 
          </div>
@@ -171,4 +176,4 @@ class Keywords extends Component {
    }
 }
 
-export default Keywords
+export default UpdateKeywords

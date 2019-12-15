@@ -21,10 +21,6 @@ class AddRecipe extends Component {
          time: "",
          ingredients: [],
          prep: [],
-         cooked: "",
-         cooked_date: "",
-         keywords: [""],
-         rating: 0,
          addRecipeSuccessful: false,
          recipeValidationError: false,
          snackBarOpen: false,
@@ -60,11 +56,7 @@ class AddRecipe extends Component {
          servings: this.state.servings,
          time: this.state.time,
          ingredients: this.state.ingredients,
-         prep: this.state.prep,
-         cooked: this.state.cooked,
-         cooked_date: this.state.cooked_date,
-         keywords: [this.state.keywords],
-         rating: this.state.rating
+         prep: this.state.prep
       }
 
       axios.post("http://localhost:9000/recipes", newRecipe)
@@ -96,11 +88,7 @@ class AddRecipe extends Component {
          servings: "",
          time: "",
          ingredients: [""],
-         prep: [""],
-         cooked: "",
-         cooked_date: "",
-         keywords: [""],
-         rating: 0
+         prep: [""]
       })
    }
 
@@ -245,7 +233,7 @@ class AddRecipe extends Component {
 
                   <AddIngredients addIngredients={this.addIngredients}/>
                   <AddPrep addPrep={this.addPrep}/>
-                  <Keywords addKeywords={this.addKeywords}/>
+                  {/* <Keywords addKeywords={this.addKeywords}/> */}
 
                   <button className="AddRecipe-submit-button">Add Recipe</button>
                </div>
