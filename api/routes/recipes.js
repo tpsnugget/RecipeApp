@@ -19,15 +19,13 @@ var recipeSchema = new mongoose.Schema({
   servings: String,
   time: String,
   ingredients: Array,
-  prep: Array,
-  keywords: Array
+  prep: Array
 })
 
 var Recipe = mongoose.model("Recipe", recipeSchema)
 
 /* Get All Recipes */
 router.get('/', async function(req, res) {
-   console.log("Server side get: ", req.query)
    await Recipe.find(req.query, (err, data) => {
     //  console.log("req is: ", req)
     //  console.log("res is: ", res)
@@ -36,11 +34,6 @@ router.get('/', async function(req, res) {
 
     // This sends an array of objects from the db
     // console.log("data in server side router: ", data)
-      if(err){
-         console.error("Get recipe error: ", err)
-      } else {
-         console.log("Get recipe data: ", data)
-      }
 
      res.send(data)
    } )
@@ -73,5 +66,19 @@ router.delete('/', async function (req, res) {
       }
    })
  });
+
+ /* Put (Update) One Recipe */
+ router.put('/', async function (req, res) {
+    console.log("Server side Put req.body", req.body)
+    await Recipe.findByIdAndUpdate({_id: req.body._id}, req.body, (err, data) => {
+      if (err) {
+         console.error(err.errmsg)
+         res.send(err)
+      } else {
+         console.log(data)
+         res.send(data)
+      }
+    })
+ })
 
 module.exports = router;

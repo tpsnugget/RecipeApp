@@ -4,7 +4,7 @@ import "./UpdateRecipe.css"
 import axios from "axios"
 import AddIngredients from "./AddIngredients"
 import AddPrep from "./AddPrep"
-import Keywords from "./Keywords"
+import UpdateKeywords from "./UpdateKeywords"
 
 class UpdateRecipe extends Component {
 
@@ -21,12 +21,28 @@ class UpdateRecipe extends Component {
                image: "",
                servings: "",
                time: "",
-               ingredients: "",
-               prep: "",
+               ingredients: [""],
+               prep: [""],
                cooked: "",
                cooked_date: "",
-               keywords: "",
-               rating: 0
+               keywords: {
+                  beans: false,
+                  cheese: false,
+                  entree: false,
+                  instantPot: false,
+                  meat: false,
+                  onion: false,
+                  pasta: false,
+                  poultry: false,
+                  rice: false,
+                  risotto: false,
+                  saucesAndGravies: false,
+                  sideDish: false,
+                  slowCooker: false,
+                  squash: false
+               },
+               rating: 0,
+               _id: ""
             }],
          addRecipeSuccessful: false,
          recipeValidationError: false,
@@ -37,7 +53,6 @@ class UpdateRecipe extends Component {
       }
       this.handleChange = this.handleChange.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
-      this.addPrep = this.addPrep.bind(this)
       this.cancel = this.cancel.bind(this)
       this.addIngredients = this.addIngredients.bind(this)
       this.addPrep = this.addPrep.bind(this)
@@ -54,7 +69,6 @@ class UpdateRecipe extends Component {
             if (response.data === "") {
                console.log("axios.get not in the db")
             } else {
-               console.log("axios.get from Update Recipe: ", response)
                this.setState({
                   title: response.data[0].title,
                   description: response.data[0].description,
@@ -69,9 +83,9 @@ class UpdateRecipe extends Component {
                   cooked: "",
                   cooked_date: "",
                   keywords: response.data[0].keywords,
-                  rating: 0
+                  rating: 0,
+                  _id: response.data[0]._id
                })
-               this.checkForGoodLogin()
             }
          })
          .catch((err) => console.log(err))
@@ -79,6 +93,23 @@ class UpdateRecipe extends Component {
 
    componentDidMount() {
       this.callAPI()
+   }
+
+   cancel(){
+      this.setState({cancel: true})
+   }
+
+   addIngredients(e){
+      this.setState({ingredients: e})
+   }
+
+   addPrep(e){
+      this.setState({prep: e})
+   }
+
+   addKeywords(e){
+      console.log("addKeywords says: ", e)
+      this.setState({keywords: e})
    }
 
    handleChange(e) {
@@ -104,10 +135,10 @@ class UpdateRecipe extends Component {
          cooked: this.state.cooked,
          cooked_date: this.state.cooked_date,
          keywords: [this.state.keywords],
-         rating: this.state.rating
+         _id: this.state._id
       }
 
-      axios.post("http://localhost:9000/recipes", newRecipe)
+      axios.put("http://localhost:9000/recipes", newRecipe)
          .then((response) => {
             console.log(response)
             if (response.data._message === "Recipe validation failed") {
@@ -125,55 +156,15 @@ class UpdateRecipe extends Component {
             }
          })
          .catch((err) => console.log(err))
-
-      this.setState({
-         title: "",
-         description: "",
-         author: "",
-         website: "",
-         url: "",
-         image: "",
-         servings: "",
-         time: "",
-         ingredients: [""],
-         prep: [""],
-         cooked: "",
-         cooked_date: "",
-         keywords: [""],
-         rating: 0
-      })
-   }
-
-   cancel() {
-      this.setState({ cancel: true })
-   }
-
-   addIngredients(e) {
-      this.setState({ ingredients: e })
-   }
-
-   addPrep(e) {
-      this.setState({ prep: e })
-   }
-
-   addKeywords(e) {
-      console.log("addKeywords says: ", e)
-      this.setState({ keywords: e })
    }
 
    render() {
 
-      const { addRecipeSuccessful, recipeValidationError, cancel } = this.state
-      const { title, description, author, website, servings, time, url, image } = this.state
-
-      console.log("this.state: ", this.state)
-
+      const { title, description, author, website, servings, time, url, image, cancel } = this.state
+      console.log("UpdateRecipe Component: this.state: ", this.state)
       return (
          <div>
-            {addRecipeSuccessful && <Redirect to="/recipes" />}
-            {recipeValidationError && <Redirect to="/recipes" />}
             {cancel && <Redirect to="/recipes" />}
-
             <form onSubmit={this.handleSubmit} action="" method="post">
 
                <h1 className="UpdateRecipe-h1">Update Recipe</h1>
@@ -288,9 +279,9 @@ class UpdateRecipe extends Component {
 
                   <AddIngredients addIngredients={this.addIngredients} />
                   <AddPrep addPrep={this.addPrep} />
-                  <Keywords addKeywords={this.addKeywords} />
+                  {/* <UpdateKeywords addKeywords={this.addKeywords} data={this.state}/> */}
 
-                  <button className="UpdateRecipe-submit-button">Add Recipe</button>
+                  <button className="UpdateRecipe-submit-button">Update Recipe</button>
                </div>
             </form>
             <button className="UpdateRecipe-cancel-button" onClick={this.cancel}>Cancel</button>
