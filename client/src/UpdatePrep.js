@@ -22,7 +22,7 @@ class UpdatePrep extends Component{
          this.setState({
             prep: this.props.prep
          })
-      }, 1000);
+      }, 100);
    }
 
    handleChange(e) {

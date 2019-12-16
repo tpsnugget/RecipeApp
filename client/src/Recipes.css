@@ -65,7 +65,7 @@
 
 .left-side-container img {
    width: 50%;
-   border-radius: 50%;
+   border-radius: 5%;
 }
 
 .left-side-container button {
@@ -79,4 +79,8 @@
 
 hr {
    width: 95%;
+}
+
+.SideRecipes-h2 {
+   margin: 0 0.25rem;
 }

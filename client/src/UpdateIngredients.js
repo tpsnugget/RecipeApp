@@ -10,19 +10,57 @@ class UpdateIngredients extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         amount: "",
-         measure: "",
-         ingredient: "",
-         ingredients: []
+         ingredients: [{
+            amount: "",
+            measure: "",
+            ingredient: ""
+         }]
       }
-      this.handleChange = this.handleChange.bind(this)
+      this.handleAmountChange = this.handleAmountChange.bind(this)
+      this.handleMeasureChange = this.handleMeasureChange.bind(this)
+      this.handleIngredientChange = this.handleIngredientChange.bind(this)
       this.addIngredient = this.addIngredient.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
    }
 
-   handleChange(e) {
+   componentDidMount(){
+      setTimeout(() => {
+         this.setState({
+            ingredients: this.props.ingredients
+         })
+      }, 1000);
+   }
+
+   handleAmountChange(e) {
+      var tempState = [...this.state.ingredients]
+      var tempIngredient = tempState[e.target.id]
+      tempIngredient = {...tempIngredient, amount: e.target.value}
+      tempState[e.target.id] = tempIngredient
+      console.log("tempIngredient: ", tempIngredient)
       this.setState({
-         [e.target.name]: e.target.value
+         ingredients: tempState
+      })
+   }
+
+   handleMeasureChange(e) {
+      var tempState = [...this.state.ingredients]
+      var tempIngredient = tempState[e.target.id]
+      tempIngredient = {...tempIngredient, measure: e.target.value}
+      tempState[e.target.id] = tempIngredient
+      console.log("tempIngredient: ", tempIngredient)
+      this.setState({
+         ingredients: tempState
+      })
+   }
+
+   handleIngredientChange(e) {
+      var tempState = [...this.state.ingredients]
+      var tempIngredient = tempState[e.target.id]
+      tempIngredient = {...tempIngredient, ingredient: e.target.value}
+      tempState[e.target.id] = tempIngredient
+      console.log("tempIngredient: ", tempIngredient)
+      this.setState({
+         ingredients: tempState
       })
    }
 
@@ -33,7 +71,7 @@ class UpdateIngredients extends Component {
       const { amount, measure, ingredient, ingredients } = this.state
 
       this.setState({
-         ingredients: [...ingredients, { amount: amount, measure: measure, ingredient: ingredient }],
+         ingredients: [...ingredients, { amount: this.state.amount, measure: this.state.measure, ingredient: ingredient }],
       })
    }
 
@@ -44,17 +82,18 @@ class UpdateIngredients extends Component {
 
    render() {
 
-      var ingredientList = this.props.ingredients.map((ingredient) => {
+      var ingredientList = this.state.ingredients.map((ingredient, i) => {
          return (
             <div className="UpdateIngredient-main-div">
                <label className="UpdateIngredients-label">Amount:
             <div>
                      <input
+                        id={i}
                         className="UpdateIngredients-input-amount"
                         type="text"
                         value={ingredient.amount}
                         name="amount"
-                        onChange={this.handleChange}>
+                        onChange={this.handleAmountChange}>
                      </input>
                   </div>
                </label>
@@ -62,11 +101,12 @@ class UpdateIngredients extends Component {
                <label className="UpdateIngredients-label">Measure:
             <div>
                      <input
+                        id={i}
                         className="UpdateIngredients-input-measure"
                         type="text"
                         value={ingredient.measure}
                         name="measure"
-                        onChange={this.handleChange}>
+                        onChange={this.handleMeasureChange}>
                      </input>
                   </div>
                </label>
@@ -74,11 +114,12 @@ class UpdateIngredients extends Component {
                <label className="UpdateIngredients-label">Ingredient:
             <div>
                      <input
+                        id={i}
                         className="UpdateIngredients-input-ingredient"
                         type="text"
                         value={ingredient.ingredient}
                         name="ingredient"
-                        onChange={this.handleChange}>
+                        onChange={this.handleIngredientChange}>
                      </input>
                   </div>
                </label>
