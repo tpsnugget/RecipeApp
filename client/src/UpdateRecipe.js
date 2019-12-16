@@ -2,9 +2,9 @@ import React, { Component } from "react"
 import { Redirect } from "react-router-dom"
 import "./UpdateRecipe.css"
 import axios from "axios"
-import AddIngredients from "./AddIngredients"
-import AddPrep from "./AddPrep"
-import UpdateKeywords from "./UpdateKeywords"
+import UpdateIngredients from "./UpdateIngredients"
+import UpdatePrep from "./UpdatePrep"
+// import UpdateKeywords from "./UpdateKeywords"
 
 class UpdateRecipe extends Component {
 
@@ -55,7 +55,7 @@ class UpdateRecipe extends Component {
       this.handleSubmit = this.handleSubmit.bind(this)
       this.cancel = this.cancel.bind(this)
       this.addIngredients = this.addIngredients.bind(this)
-      this.addPrep = this.addPrep.bind(this)
+      this.updatePrep = this.updatePrep.bind(this)
       this.addKeywords = this.addKeywords.bind(this)
    }
 
@@ -103,7 +103,7 @@ class UpdateRecipe extends Component {
       this.setState({ingredients: e})
    }
 
-   addPrep(e){
+   updatePrep(e){
       this.setState({prep: e})
    }
 
@@ -161,7 +161,7 @@ class UpdateRecipe extends Component {
    render() {
 
       const { title, description, author, website, servings, time, url, image, cancel } = this.state
-      console.log("UpdateRecipe Component: this.state: ", this.state)
+      
       return (
          <div>
             {cancel && <Redirect to="/recipes" />}
@@ -277,8 +277,8 @@ class UpdateRecipe extends Component {
                      </div>
                   </label>
 
-                  <AddIngredients addIngredients={this.addIngredients} />
-                  <AddPrep addPrep={this.addPrep} />
+                  <UpdateIngredients addIngredients={this.addIngredients} ingredients={this.state.ingredients}/>
+                  <UpdatePrep updatePrep={this.updatePrep} prep={this.state.prep} />
                   {/* <UpdateKeywords addKeywords={this.addKeywords} data={this.state}/> */}
 
                   <button className="UpdateRecipe-submit-button">Update Recipe</button>

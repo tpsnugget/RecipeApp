@@ -51,7 +51,7 @@ class AddPrep extends Component {
                         <textarea
                            className="AddRecipe-textarea-description"
                            type="text"
-                           rows="10"
+                           rows="6"
                            cols="100"
                            placeholder="Preperation Step"
                            name="prepStep"

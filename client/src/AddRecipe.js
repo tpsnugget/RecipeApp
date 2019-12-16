@@ -4,7 +4,7 @@ import "./AddRecipe.css"
 import axios from "axios"
 import AddIngredients from "./AddIngredients"
 import AddPrep from "./AddPrep"
-import Keywords from "./Keywords"
+// import Keywords from "./Keywords"
 
 class AddRecipe extends Component {
 
