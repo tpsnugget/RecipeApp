@@ -1,0 +1,66 @@
+.UpdateIngredients-container {
+   width: 805px;
+   background-color: rgba(102, 51, 153, 0.1);
+   border: 1px solid rgba(102, 51, 153, 0.2);
+   padding: 0.5rem;
+   border-radius: 0.25rem;
+}
+
+.UpdateIngredient-main-div {
+   display: flex;
+}
+
+.UpdateIngredients-input-amount {
+   width: 150px;
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+   margin-right: 1rem;
+}
+
+.UpdateIngredients-input-measure {
+   width: 150px;
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+   margin-right: 1rem;
+}
+
+.UpdateIngredients-input-ingredient {
+   width: 450px;
+   height: 25px;
+   border-radius: 0.25rem;
+   border: 2px solid lightgray;
+}
+
+.UpdateIngredients-label {
+   text-align: left;
+   font-size: 0.95rem;
+   font-weight: 600;
+   margin-bottom: 1rem;
+}
+
+.UpdateIngredients-two-columns {
+   width: 65%;
+   
+   justify-content: space-between;
+}
+
+.UpdateIngredients-button-div {
+   display: flex;
+   align-items: center;
+}
+
+.UpdateIngredients-submit-button {
+   width: 156px;
+   height: 32px;
+   margin: 0;
+   margin-bottom: 1rem;
+}
+
+.UpdateIngredients-finished-button {
+   width: 30%;
+   height: 32px;
+   margin: 0 1rem;
+   margin-bottom: 1rem;
+}
