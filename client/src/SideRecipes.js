@@ -27,7 +27,7 @@ class SideRecipes extends Component {
       const recipes = data.map((recipe, i) => {
          return (
             <div key={recipe._id} id={recipe._id} className="recipe">
-               <h2>{recipe.title}</h2>
+               <h2 className="SideRecipes-h2">{recipe.title}</h2>
                <img src={recipe.image} alt={recipe.title} />
                <button
                   className="SideRecipes-button"
