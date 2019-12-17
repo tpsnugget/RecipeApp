@@ -96,9 +96,7 @@ class Recipes extends Component {
       /* The ternary operator below is because sometimes the data from the db
          is one-level down in an array, and sometimes it is two-levels down
          in an array */
-      {
-         if(!Array.isArray(data)){data = data.data}
-      }
+       if(!Array.isArray(data)){data = data.data} 
 
       return (
          <Fragment>

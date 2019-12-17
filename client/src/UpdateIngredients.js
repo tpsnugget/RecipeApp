@@ -21,13 +21,6 @@ class UpdateIngredients extends Component {
       this.setPropsToState = this.setPropsToState.bind(this)
    }
 
-   // componentDidMount(){
-   //    setTimeout(() => {
-   //       this.setState({
-   //          ingredients: this.props.ingredients
-   //       })
-   //    }, 1000);
-   // }
 
    async setPropsToState(){
       try{
@@ -85,7 +78,7 @@ class UpdateIngredients extends Component {
       e.preventDefault()
       e.stopPropagation()
 
-      const { amount, measure, ingredient, ingredients } = this.state
+      const { ingredient, ingredients } = this.state
 
       this.setState({
          ingredients: [...ingredients, { amount: this.state.amount, measure: this.state.measure, ingredient: ingredient }],

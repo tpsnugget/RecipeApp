@@ -29,15 +29,6 @@ class UpdatePrep extends Component{
       }
    }
 
-   // componentDidMount(){
-   //    this.setPropsToState()
-   //    // setTimeout(() => {
-   //    //    this.setState({
-   //    //       prep: this.props.prep
-   //    //    })
-   //    // }, 100);
-   // }
-
    componentDidUpdate(){
       if(this.state.count === 1){
          this.setPropsToState()

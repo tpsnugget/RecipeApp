@@ -122,7 +122,13 @@ class MainRecipe extends Component {
                </div>
                
             </div>
-            {title !== "" ? <a className="MainRecipe-anchor" href={url} target="_blank">See Recipe on Original Website</a> : ""}
+            {title !== "" ?
+               <a
+                  className="MainRecipe-anchor"
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+               >See Recipe on Original Website</a> : ""}
          </Fragment>
       } else {
          display = 

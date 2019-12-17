@@ -160,10 +160,11 @@ class UpdateRecipe extends Component {
 
    render() {
 
-      const { title, description, author, website, servings, time, url, image, cancel } = this.state
+      const { title, description, author, website, servings, time, url, image, cancel, addRecipeSuccessful } = this.state
       
       return (
          <div>
+            {addRecipeSuccessful && <Redirect to="/recipes" />}
             {cancel && <Redirect to="/recipes" />}
             <form onSubmit={this.handleSubmit} action="" method="post">
 
