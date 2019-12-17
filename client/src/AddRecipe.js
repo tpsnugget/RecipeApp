@@ -70,7 +70,6 @@ class AddRecipe extends Component {
                   recipeValidationError: true
                })
             } else {
-               console.log("Running addRecipe Successful code")
                this.setState({
                   addRecipeSuccessful: true
                })

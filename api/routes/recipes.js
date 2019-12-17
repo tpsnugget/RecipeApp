@@ -69,7 +69,6 @@ router.delete('/', async function (req, res) {
 
  /* Put (Update) One Recipe */
  router.put('/', async function (req, res) {
-    console.log("Server side Put req.body", req.body)
     await Recipe.findByIdAndUpdate({_id: req.body._id}, req.body, (err, data) => {
       if (err) {
          console.error(err.errmsg)
