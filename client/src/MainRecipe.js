@@ -28,37 +28,12 @@ class MainRecipe extends Component {
    }
 
    updateRecipe() {
-      if(this.props.data.title === ""){
-         this.setState({
-            snackBarOpen: true,
-            msg: "You must select a recipe before it can be edited"
-         })
-         setTimeout(() => {
-            this.setState({
-               snackBarOpen: false,
-               msg: ""
-            })
-         }, 2000);
-      } else {
-         this.setState({
-            updateRecipe: true
-         })
-      }
+      this.setState({
+         updateRecipe: true
+      })
    }
 
    deleteRecipe() {
-      if (this.props.data.title === "") {
-         this.setState({
-            snackBarOpen: true,
-            msg: "You must select a recipe before it can be deleted"
-         })
-         setTimeout(() => {
-            this.setState({
-               snackBarOpen: false,
-               msg: ""
-            })
-         }, 2000);
-      } else {
          axios.delete("http://localhost:9000/recipes", {
             params: {
                _id: this.props.data._id
@@ -87,7 +62,6 @@ class MainRecipe extends Component {
                }
             })
             .catch((err) => console.log(err))
-      }
    }
 
    render() {
@@ -117,46 +91,46 @@ class MainRecipe extends Component {
 
       var display = ""
 
-      if(title !== ""){
-         display = 
-         <Fragment>
-            <h1>{title}</h1>
-            <p className="description">{description}</p>
-            <img src={image} alt={title} />
-            <div className="right-side-inner-container">
-               <div className="right-side-ingredients">
-                  {title !== "" ? <h4>Ingredients:</h4> : ""}
-                  {showIngredients}
+      if (title !== "") {
+         display =
+            <Fragment>
+               <h1>{title}</h1>
+               <p className="description">{description}</p>
+               <img src={image} alt={title} />
+               <div className="right-side-inner-container">
+                  <div className="right-side-ingredients">
+                     {title !== "" ? <h4>Ingredients:</h4> : ""}
+                     {showIngredients}
+                  </div>
+                  <div className="right-side-prep">
+                     {title !== "" ? <h4>Prep:</h4> : ""}
+                     {title !== "" ? showPrep : ""}
+
+                  </div>
+
                </div>
-               <div className="right-side-prep">
-                  {title !== "" ? <h4>Prep:</h4> : ""}
-                  {title !== "" ? showPrep : ""}
-                  
-               </div>
-               
-            </div>
-            {title !== "" ?
-               <a
-                  className="MainRecipe-anchor"
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-               >See Recipe on Original Website</a> : ""}
-         </Fragment>
+               {title !== "" ?
+                  <a
+                     className="MainRecipe-anchor"
+                     href={url}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                  >See Recipe on Original Website</a> : ""}
+            </Fragment>
       } else {
-         display = 
-         <Fragment>
-            <h1>Main Recipe Page</h1>
-            <h2>Click on a Recipe to the Left for More Information</h2>
-         </Fragment>
+         display =
+            <Fragment>
+               <h1>Main Recipe Page</h1>
+               <h2>Click on a Recipe to the Left for More Information</h2>
+            </Fragment>
       }
 
       return (
          <Fragment>
             {addRecipe && <Redirect to="/AddRecipe" />}
             {updateRecipe && <Redirect to={{
-                                             pathname: "/UpdateRecipe",
-                                             state: {id: this.props.data._id}
+               pathname: "/UpdateRecipe",
+               state: { id: this.props.data._id }
             }} />}
             <Snackbar
                open={snackBarOpen}
@@ -165,11 +139,12 @@ class MainRecipe extends Component {
                message={msg}
                anchorOrigin={{
                   vertical: "bottom",
-                  horizontal: "left"}}
+                  horizontal: "left"
+               }}
             />
             <button onClick={this.addRecipe}>Add Recipe</button>
-            <button onClick={this.updateRecipe}>Edit Recipe</button>
-            <button onClick={this.deleteRecipe}>Delete Recipe</button>
+            {this.props.data.title !== "" && <button onClick={this.updateRecipe}>Edit Recipe</button>}
+            {this.props.data.title !== "" && <button onClick={this.deleteRecipe}>Delete Recipe</button>}
             {display}
          </Fragment>
       )
