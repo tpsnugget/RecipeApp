@@ -28,9 +28,22 @@ class MainRecipe extends Component {
    }
 
    updateRecipe() {
-      this.setState({
-         updateRecipe: true
-      })
+      if(this.props.data.title === ""){
+         this.setState({
+            snackBarOpen: true,
+            msg: "You must select a recipe before it can be edited"
+         })
+         setTimeout(() => {
+            this.setState({
+               snackBarOpen: false,
+               msg: ""
+            })
+         }, 2000);
+      } else {
+         this.setState({
+            updateRecipe: true
+         })
+      }
    }
 
    deleteRecipe() {
