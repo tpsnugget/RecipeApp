@@ -110,12 +110,12 @@ class Login extends Component {
                   horizontal: "left"
                }}
             />
-            <h1>Login is up Man!</h1>
+            <h1 className="Login-h1">Login</h1>
             <div className="Login">
                <form onSubmit={this.handleSubmit}>
                   <div className="Login-div-row">
-                     <label>Username:
-                  <input className="Login-input-column-one"
+                     <label className="Login-label">Username:
+                  <input className="Login-input"
                            type="text"
                            placeholder="Username"
                            name="username"
@@ -123,8 +123,8 @@ class Login extends Component {
                            onChange={this.handleChange}
                         />
                      </label>
-                     <label>Password:
-                  <input className="Login-input-column-one"
+                     <label className="Login-label">Password:
+                  <input className="Login-input"
                            type="password"
                            placeholder="Password"
                            name="password"
