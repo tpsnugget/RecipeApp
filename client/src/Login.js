@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Link, Redirect } from "react-router-dom"
 import Snackbar from '@material-ui/core/Snackbar';
 import axios from "axios"
-import "./Login.css"
+import "./css/Login.css"
 
 class Login extends Component {
 
@@ -96,7 +96,8 @@ class Login extends Component {
          {isLoggedIn && <Redirect to={{
             pathname: "/recipes",
             state: {
-               isLoggedIn: true
+               isLoggedIn: true,
+               username: this.state.username
             }
          }} />}
             <Snackbar

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import "./UpdatePrep.css"
+import "./css/UpdatePrep.css"
 
 class UpdatePrep extends Component{
 

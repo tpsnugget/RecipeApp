@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link, Redirect } from "react-router-dom"
-import "./NavBar.css"
+import "./css/NavBar.css"
 
 class NavBar extends Component {
 
@@ -21,13 +21,14 @@ class NavBar extends Component {
    render() {
 
       const { isLoggedIn } = this.state
-      const { first, last } = this.props
+
+      const displayUsername = `Signed in as: ${this.props.username}`
 
       return (
          <div className="NavBar">
          {!isLoggedIn && <Redirect to="/"/>}
             <div className="NavBar-left-side">
-               { isLoggedIn ? <>Signed in as: `${first} ${last}`</> : <>Please Login or Sign Up<i className="fa fa-arrow-right"></i></>}
+               { isLoggedIn ? <>{displayUsername}</> : <>Please Login or Sign Up<i className="fa fa-arrow-right"></i></>}
             </div>
             <div className="NavBar-right-side">
                { isLoggedIn ? "" : <Link to="/login" className="NavBar-Login-button">LOGIN</Link>}

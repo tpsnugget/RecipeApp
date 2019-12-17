@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Redirect } from "react-router-dom"
-import "./AddRecipe.css"
+import "./css/AddRecipe.css"
 import axios from "axios"
 import AddIngredients from "./AddIngredients"
 import AddPrep from "./AddPrep"

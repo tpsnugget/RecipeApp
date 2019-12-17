@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from "react-router-dom"
 import Recipes from "./Recipes"
-import Users from "./Users"
 import Landing from "./Landing"
 import Error from "./Error"
 import Signup from "./Signup"
@@ -9,7 +8,7 @@ import Login from "./Login"
 import AddRecipe from "./AddRecipe"
 import UpdateRecipe from "./UpdateRecipe"
 import AddIngredients from "./AddIngredients"
-import './App.css';
+import './css/App.css';
 
 class App extends Component {
 
@@ -26,17 +25,13 @@ class App extends Component {
           <Route exact path="/addIngredients">
             <AddIngredients />
           </Route>
-          <Route exact path="/recipes">
-            <Recipes />
+          <Route exact path="/recipes" component={Recipes}>
           </Route>
           <Route exact path="/signup">
             <Signup />
           </Route>
           <Route exact path="/login">
             <Login />
-          </Route>
-          <Route exact path="/users">
-            <Users />
           </Route>
           <Route exact path="/">
             <Landing />
