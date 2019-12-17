@@ -168,8 +168,8 @@ class MainRecipe extends Component {
                   horizontal: "left"}}
             />
             <button onClick={this.addRecipe}>Add Recipe</button>
-            <button onClick={this.updateRecipe}>Edit Recipe</button>
-            <button onClick={this.deleteRecipe}>Delete Recipe</button>
+            {this.props.data.title !== "" && <button onClick={this.updateRecipe}>Edit Recipe</button>}
+            {this.props.data.title !== "" && <button onClick={this.deleteRecipe}>Delete Recipe</button>}
             {display}
          </Fragment>
       )
