@@ -10,19 +10,41 @@ class UpdatePrep extends Component{
    constructor(props){
       super(props)
       this.state = {
-         prep: []
+         prep: this.props.prep,
+         count: 1
       }
       this.handleChange = this.handleChange.bind(this)
       this.updatePrep = this.updatePrep.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
+      this.setPropsToState = this.setPropsToState.bind(this)
    }
 
-   componentDidMount(){
-      setTimeout(() => {
-         this.setState({
+   async setPropsToState(){
+      try{
+         await this.setState({
             prep: this.props.prep
          })
-      }, 100);
+      } catch (error){
+         console.error("UpdatePrep Component, setPropsToState error: ", error)
+      }
+   }
+
+   // componentDidMount(){
+   //    this.setPropsToState()
+   //    // setTimeout(() => {
+   //    //    this.setState({
+   //    //       prep: this.props.prep
+   //    //    })
+   //    // }, 100);
+   // }
+
+   componentDidUpdate(){
+      if(this.state.count === 1){
+         this.setPropsToState()
+         this.setState({
+            count: 2
+         })
+      }
    }
 
    handleChange(e) {

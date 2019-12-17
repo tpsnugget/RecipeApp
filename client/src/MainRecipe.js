@@ -80,7 +80,7 @@ class MainRecipe extends Component {
    render() {
 
       const { snackBarOpen, msg, addRecipe, updateRecipe } = this.state
-      const { title, ingredients, prep, description, image } = this.props.data
+      const { title, ingredients, prep, description, image, url } = this.props.data
 
       const showIngredients = ingredients.map((ingredient) => {
          return (
@@ -118,8 +118,11 @@ class MainRecipe extends Component {
                <div className="right-side-prep">
                   {title !== "" ? <h4>Prep:</h4> : ""}
                   {title !== "" ? showPrep : ""}
+                  
                </div>
+               
             </div>
+            {title !== "" ? <a className="MainRecipe-anchor" href={url} target="_blank">See Recipe on Original Website</a> : ""}
          </Fragment>
       } else {
          display = 

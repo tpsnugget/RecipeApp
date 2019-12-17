@@ -10,31 +10,48 @@ class UpdateIngredients extends Component {
    constructor(props) {
       super(props)
       this.state = {
-         ingredients: [{
-            amount: "",
-            measure: "",
-            ingredient: ""
-         }]
+         ingredients: this.props.ingredients,
+         count: 1
       }
       this.handleAmountChange = this.handleAmountChange.bind(this)
       this.handleMeasureChange = this.handleMeasureChange.bind(this)
       this.handleIngredientChange = this.handleIngredientChange.bind(this)
       this.addIngredient = this.addIngredient.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
+      this.setPropsToState = this.setPropsToState.bind(this)
    }
 
-   componentDidMount(){
-      setTimeout(() => {
-         this.setState({
+   // componentDidMount(){
+   //    setTimeout(() => {
+   //       this.setState({
+   //          ingredients: this.props.ingredients
+   //       })
+   //    }, 1000);
+   // }
+
+   async setPropsToState(){
+      try{
+         await this.setState({
             ingredients: this.props.ingredients
          })
-      }, 1000);
+      } catch (error){
+         console.error("UpdatePrep Component, setPropsToState error: ", error)
+      }
+   }
+
+   componentDidUpdate() {
+      if(this.state.count === 1){
+         this.setPropsToState()
+         this.setState({
+            count: 2
+         })
+      }
    }
 
    handleAmountChange(e) {
       var tempState = [...this.state.ingredients]
       var tempIngredient = tempState[e.target.id]
-      tempIngredient = {...tempIngredient, amount: e.target.value}
+      tempIngredient = { ...tempIngredient, amount: e.target.value }
       tempState[e.target.id] = tempIngredient
       console.log("tempIngredient: ", tempIngredient)
       this.setState({
@@ -45,7 +62,7 @@ class UpdateIngredients extends Component {
    handleMeasureChange(e) {
       var tempState = [...this.state.ingredients]
       var tempIngredient = tempState[e.target.id]
-      tempIngredient = {...tempIngredient, measure: e.target.value}
+      tempIngredient = { ...tempIngredient, measure: e.target.value }
       tempState[e.target.id] = tempIngredient
       console.log("tempIngredient: ", tempIngredient)
       this.setState({
@@ -56,7 +73,7 @@ class UpdateIngredients extends Component {
    handleIngredientChange(e) {
       var tempState = [...this.state.ingredients]
       var tempIngredient = tempState[e.target.id]
-      tempIngredient = {...tempIngredient, ingredient: e.target.value}
+      tempIngredient = { ...tempIngredient, ingredient: e.target.value }
       tempState[e.target.id] = tempIngredient
       console.log("tempIngredient: ", tempIngredient)
       this.setState({
