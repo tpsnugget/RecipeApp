@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import SideRecipes from "./SideRecipes"
 import MainRecipe from "./MainRecipe"
 import axios from "axios"
-import "./Recipes.css"
+import "./css/Recipes.css"
 import NavBar from "./NavBar"
 
 class Recipes extends Component {
@@ -102,6 +102,7 @@ class Recipes extends Component {
          <Fragment>
             <NavBar
                isLoggedIn={this.state.isLoggedIn}
+               username={this.props.location.state ? this.props.location.state.username : "anonymous"}
             />
             <div className="main-container">
                <div className="left-side-container">

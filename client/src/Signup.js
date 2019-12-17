@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react"
 import { Link, Redirect } from "react-router-dom"
 import Snackbar from '@material-ui/core/Snackbar';
 import axios from "axios"
-import "./Signup.css"
+import "./css/Signup.css"
 
 class Signup extends Component {
 

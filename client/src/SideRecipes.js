@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import "./SideRecipes.css"
+import "./css/SideRecipes.css"
 
 class SideRecipes extends Component {
 

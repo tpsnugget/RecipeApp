@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react"
 import { Redirect } from "react-router-dom"
-import "./MainRecipe.css"
+import "./css/MainRecipe.css"
 import axios from "axios"
 import Snackbar from '@material-ui/core/Snackbar';
 
